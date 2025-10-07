@@ -1,6 +1,6 @@
 
 import { useMutation } from "@tanstack/react-query";
-import axiosInstance from "../api/axiosInstance";
+import axiosInstance from "../axiosInstance";
 
 export const usePrediction = () => {
   return useMutation({

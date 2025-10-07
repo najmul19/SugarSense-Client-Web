@@ -27,6 +27,8 @@ const Navbar = () => {
           <Link to="/api-docs" className="hover:text-gray-200">
             API Docs
           </Link>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
         </nav>
       </div>
     </header>

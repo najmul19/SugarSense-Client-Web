@@ -6,6 +6,9 @@ import History from "../Pages/History/History";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import FeatureImportance from "../Pages/FeatureImportance/FeatureImportance";
 import ApiDocs from "../Pages/ApiDocs/ApiDocs";
+import AuthLayout from "../Layouts/AuthLayout/AuthLayout";
+import Login from "../Authentication/Login/Login";
+import Register from "../Authentication/SignUp/Register";
 
 export const router = createBrowserRouter([
   {
@@ -38,5 +41,13 @@ export const router = createBrowserRouter([
         Component: ApiDocs,
       },
     ]
+  },
+  {
+    path: "/",
+    Component: AuthLayout,
+    children: [
+      { path: "login", Component: Login },
+      { path: "register", Component: Register },
+    ],
   },
 ]);

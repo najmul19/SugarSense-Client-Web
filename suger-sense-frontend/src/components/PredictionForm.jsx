@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { usePrediction } from "../hooks/usePrediction";
+import { usePrediction } from "../api/Hooks/usePrediction";
 import ResultCard from "./ResultCard";
 
 const formSections = [
