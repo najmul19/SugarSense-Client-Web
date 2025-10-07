@@ -40,7 +40,7 @@ const FeatureImportance = () => {
     .slice(0, 10);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 md:p-10 lg:p-16">
+    <div className="min-h-screen  p-6 md:p-10 lg:p-16">
       {/* Title */}
       <h1
         className="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-800"
@@ -50,7 +50,7 @@ const FeatureImportance = () => {
       </h1>
 
       {/* Bar Chart Section */}
-      <div className="bg-white shadow-lg rounded-2xl p-6" data-aos="fade-up">
+      <div className="card-bg-n shadow-lg rounded-2xl p-6" data-aos="fade-up">
         <ResponsiveContainer width="100%" height={500}>
           <BarChart
             layout="vertical"

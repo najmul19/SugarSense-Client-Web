@@ -4,6 +4,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import useAuth from "../../api/Hooks/useAuth";
 import useAxiosSecure from "../../api/Hooks/useAxiosSecure";
+import '../../globals.css';
 
 const History = () => {
   useEffect(() => {
@@ -58,7 +59,7 @@ const History = () => {
 
       <div className="overflow-x-auto" data-aos="fade-up">
         <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
-          <thead className="bg-blue-600 text-white">
+          <thead className="card-bg-secondary text-white">
             <tr>
               <th className="py-3 px-4 text-left">#</th>
               <th className="py-3 px-4 text-left">Inputs</th>

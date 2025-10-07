@@ -27,11 +27,11 @@ const Navbar = () => {
       .catch((error) => console.error(error));
   };
   return (
-    <header className="bg-blue-600 text-white py-3 shadow-md">
+    <header className="sticky z-40 top-0 bg-gradient-to-r from-[#4c669f] via-[#3b5998] to-[#192f6a] text-white py-3 shadow-md">
       <div className="container mx-auto flex justify-between items-center px-4">
         {/* <h1 className="text-xl font-bold">SugerSense</h1> */}
         <SugerSenseLogoIcon></SugerSenseLogoIcon>
-        <nav className="flex space-x-4">
+        <nav className="flex space-x-4 ">
           <Link to="/" className="hover:text-gray-200">
             Home
           </Link>

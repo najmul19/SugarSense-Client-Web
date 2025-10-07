@@ -1,0 +1,51 @@
+
+@tailwind utilities;
+
+@layer components {
+
+  .card-bg {
+    background: linear-gradient(
+      to right,
+      #ffffff8f, 
+      #eafaf7cc, 
+      #ffe9d611  
+    );
+    backdrop-filter: blur(12px);
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .card-bg:hover {
+    background: linear-gradient(
+      to bottom,
+      #4c669f,
+      #3b5998,
+      #192f6a
+    );
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+    color: white;
+  }
+
+  .card-bg-secondary {
+    background-image: linear-gradient(to left, #3f5c55b1, #3b5998, #192f6aaa);
+    color: white;
+    /* border-radius: 1rem; */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+
+  .card-bg-n {
+    background: linear-gradient(
+      to right,
+      #ffffff8f, 
+      #eafaf7cc, 
+      #ffe9d611  
+    );
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  
+}

@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { FaBrain, FaChartLine, FaShieldAlt, FaHistory } from "react-icons/fa";
+import GradientButton from "../../../Shared/Buttons/GradientButton";
 
 const Home = () => {
   return (
-    <div className="bg-gray-50 text-gray-800">
+    <div className="text-gray-800">
       {/* Hero Section */}
-      <section className="text-center py-20 bg-gradient-to-r from-blue-500 to-blue-700 text-white">
+      <section className="text-center py-20 card-bg-secondary">
         <h1 className="text-4xl font-bold mb-4">
           Predict Your Diabetes Risk in Seconds
         </h1>
@@ -14,16 +15,14 @@ const Home = () => {
           healthier future.
         </p>
         <Link to="/predict">
-          <button className="bg-white text-blue-600 font-semibold px-6 py-3 rounded-md hover:bg-gray-200 transition">
-            Get Started
-          </button>
+          <GradientButton text="Get Started"></GradientButton>
         </Link>
       </section>
 
       {/* About Section */}
       <section className="py-16 px-6 max-w-4xl mx-auto text-center">
         <h2 className="text-3xl font-semibold mb-4">About SugarSense</h2>
-        <p className="text-gray-600">
+        <p className="">
           SugarSense is a smart diabetes prediction system that uses machine
           learning to analyze your health indicators and assess your risk level.
           Our goal is to make early diagnosis easier, faster, and more accurate
@@ -32,7 +31,7 @@ const Home = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-16 bg-white">
+      <section className="py-16 ">
         <h2 className="text-3xl font-semibold text-center mb-8">
           How It Works
         </h2>
@@ -53,17 +52,17 @@ const Home = () => {
           ].map((item, i) => (
             <div
               key={i}
-              className="bg-gray-100 p-6 rounded-xl shadow hover:shadow-lg transition"
+              className="card-bg p-6 rounded-xl shadow hover:shadow-lg transition"
             >
               <h3 className="font-bold text-lg mb-2">{item.title}</h3>
-              <p className="text-gray-600">{item.desc}</p>
+              <p className="">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Features */}
-      <section className="py-16 px-6 bg-gray-50">
+      <section className="py-16 px-6 ">
         <h2 className="text-3xl font-semibold text-center mb-8">
           Key Features
         </h2>
@@ -92,33 +91,37 @@ const Home = () => {
           ].map((feature, i) => (
             <div
               key={i}
-              className="text-center bg-white p-6 rounded-xl shadow hover:shadow-lg transition"
+              className="text-center card-bg p-6 rounded-xl shadow hover:shadow-lg transition"
             >
               <div className="text-blue-600 mb-3 flex justify-center">
                 {feature.icon}
               </div>
               <h3 className="font-bold text-lg mb-1">{feature.title}</h3>
-              <p className="text-gray-600 text-sm">{feature.desc}</p>
+              <p className="  text-sm">{feature.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Educational Tips */}
-      <section className="py-16 px-6 bg-blue-50 text-center">
-        <h2 className="text-3xl font-semibold mb-6">
-          Tips to Prevent Diabetes
-        </h2>
-        <div className="max-w-3xl mx-auto space-y-3 text-gray-700">
-          <p>• Maintain a balanced diet rich in vegetables and whole grains.</p>
-          <p>• Exercise regularly to control blood sugar levels.</p>
-          <p>• Avoid smoking and excessive alcohol consumption.</p>
-          <p>• Schedule regular health checkups.</p>
+      <section className="py-16 px-6  text-center">
+        <div className="max-w-3xl mx-auto  space-y-3 text-gray-700 shadow rounded-2xl bg-amber-50 py-5">
+          <h2 className="text-3xl font-semibold mb-6">
+            Tips to Prevent Diabetes
+          </h2>
+          <div className="">
+            <p>
+              • Maintain a balanced diet rich in vegetables and whole grains.
+            </p>
+            <p>• Exercise regularly to control blood sugar levels.</p>
+            <p>• Avoid smoking and excessive alcohol consumption.</p>
+            <p>• Schedule regular health checkups.</p>
+          </div>
         </div>
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+      <section className="py-20 text-center card-bg-secondary text-white">
         <h2 className="text-3xl font-semibold mb-4">
           Ready to Check Your Diabetes Risk?
         </h2>
@@ -126,9 +129,7 @@ const Home = () => {
           It only takes a minute to get your personalized prediction.
         </p>
         <Link to="/predict">
-          <button className="bg-white text-blue-700 px-6 py-3 rounded-md font-semibold hover:bg-gray-200 transition">
-            Predict Now
-          </button>
+          <GradientButton text="Predict Now"></GradientButton>
         </Link>
       </section>
     </div>

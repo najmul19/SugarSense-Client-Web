@@ -57,7 +57,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 px-4 md:px-8 lg:px-16 py-10">
+    <div className="min-h-screen  px-4 md:px-8 lg:px-16 py-10">
       <h1
         data-aos="fade-down"
         className="text-3xl font-bold text-center text-gray-800 mb-6"
@@ -72,10 +72,10 @@ const Dashboard = () => {
       </p>
 
       {/* Stat Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3  gap-6 mb-12">
         <motion.div
           data-aos="fade-up"
-          className="bg-white shadow-md rounded-2xl p-6 text-center border-t-4 border-blue-500"
+          className="card-bg-n shadow-md rounded-2xl p-6 text-center border-t-4 border-blue-500"
         >
           <FaClipboardCheck className="text-blue-500 text-4xl mx-auto mb-3" />
           <h3 className="text-lg font-semibold">Total Predictions</h3>
@@ -84,7 +84,7 @@ const Dashboard = () => {
 
         <motion.div
           data-aos="fade-up"
-          className="bg-white shadow-md rounded-2xl p-6 text-center border-t-4 border-green-500"
+          className="card-bg-n shadow-md rounded-2xl p-6 text-center border-t-4 border-green-500"
         >
           <FaUsers className="text-green-500 text-4xl mx-auto mb-3" />
           <h3 className="text-lg font-semibold">Total Users</h3>
@@ -93,7 +93,7 @@ const Dashboard = () => {
 
         <motion.div
           data-aos="fade-up"
-          className="bg-white shadow-md rounded-2xl p-6 text-center border-t-4 border-red-500"
+          className="card-bg-n shadow-md rounded-2xl p-6 text-center border-t-4 border-red-500"
         >
           <FaHeartbeat className="text-red-500 text-4xl mx-auto mb-3" />
           <h3 className="text-lg font-semibold">Diabetic</h3>
@@ -102,7 +102,7 @@ const Dashboard = () => {
 
         <motion.div
           data-aos="fade-up"
-          className="bg-white shadow-md rounded-2xl p-6 text-center border-t-4 border-teal-500"
+          className="card-bg-n shadow-md rounded-2xl p-6 text-center border-t-4 border-teal-500"
         >
           <FaChartBar className="text-teal-500 text-4xl mx-auto mb-3" />
           <h3 className="text-lg font-semibold">Non-Diabetic</h3>
@@ -115,7 +115,7 @@ const Dashboard = () => {
         {/* Pie Chart */}
         <div
           data-aos="fade-right"
-          className="bg-white shadow-lg rounded-2xl p-6 flex flex-col items-center"
+          className="card-bg-n shadow-lg rounded-2xl p-6 flex flex-col items-center"
         >
           <h3 className="text-lg font-semibold text-gray-700 mb-4">
             Prediction Distribution
@@ -146,7 +146,7 @@ const Dashboard = () => {
         {/* Bar Chart */}
         <div
           data-aos="fade-left"
-          className="bg-white shadow-lg rounded-2xl p-6 flex flex-col items-center"
+          className="card-bg-n shadow-lg rounded-2xl p-6 flex flex-col items-center"
         >
           <h3 className="text-lg font-semibold text-gray-700 mb-4">
             System Overview

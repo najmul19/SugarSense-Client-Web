@@ -77,7 +77,7 @@ const PredictionForm = () => {
   const section = formSections[currentSection];
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow">
+    <div className="max-w-2xl mx-auto p-6  rounded-lg shadow ">
       <h2 className="text-2xl font-bold mb-4 text-center">Predict Diabetes</h2>
 
       <div className="mb-4">
@@ -113,12 +113,13 @@ const PredictionForm = () => {
 
       <div className="flex justify-between">
         {currentSection > 0 && (
-          <button className="px-4 py-2 bg-gray-300 rounded" onClick={() => setCurrentSection(currentSection - 1)}>Previous</button>
+          <button className="px-4 py-2 bg-gray-300 rounded cursor-pointer hover:bg-gray-50" onClick={() => setCurrentSection(currentSection - 1)}>Previous</button>
+          // from-[#fafcfd] via-[#eafaf7] to-[#ffe9d6]
         )}
         {currentSection < formSections.length - 1 ? (
-          <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={() => setCurrentSection(currentSection + 1)}>Next</button>
+          <button className="px-4 py-2 bg-gradient-to-b from-[#3b5998] via-[#3b5998] to-[#192f6a] hover:from-[#fafcfd] hover:via-[#eafaf7] hover:to-[#ffe9d6] text-white hover:text-blue-600 rounded cursor-pointer" onClick={() => setCurrentSection(currentSection + 1)}>Next</button>
         ) : (
-          <button className="px-4 py-2 bg-green-500 text-white rounded" onClick={handleSubmit}>
+          <button className="px-4 py-2 bg-green-500 text-white cursor-pointer hover:bg-green-950 rounded" onClick={handleSubmit}>
             {isLoading ? "Predicting..." : "Predict"}
           </button>
         )}

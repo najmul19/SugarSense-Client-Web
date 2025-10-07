@@ -17,7 +17,8 @@ const AuthLayout = () => {
     AOS.refresh();
   }, [location]);
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
+    <div className="min-h-screen flex flex-col md:flex-row card-bg-n">
+
       {/* Left / Right side changes dynamically */}
       <div
         data-aos="fade-right"

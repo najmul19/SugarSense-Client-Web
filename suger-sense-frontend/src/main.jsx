@@ -14,13 +14,16 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     {/* <RouterProvider router={router} /> */}
-    <AuthProvide>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider
-          router={router}
-          fallbackElement={<div>Loading...</div>}
-        />
-      </QueryClientProvider>
-    </AuthProvide>
+    
+    <div className="max-w-[1440px] mx-auto bg-gradient-to-b from-[#fafcfd] via-[#eafaf7b3] to-[#ffe9d63c]">
+      <AuthProvide>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider
+            router={router}
+            fallbackElement={<div>Loading...</div>}
+          />
+        </QueryClientProvider>
+      </AuthProvide>
+    </div>
   </StrictMode>
 );
