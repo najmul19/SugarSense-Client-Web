@@ -1,11 +1,33 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import SugerSenseLogoIcon from "../SugerSenseLogoIcon/SugerSenseLogoIcon";
+import useAuth from "../../api/Hooks/useAuth";
+import axiosInstance from "../../api/axiosInstance";
+import { useQuery } from "@tanstack/react-query";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+  const axiosPublic = axiosInstance;
+
+  const { data: myData, refetch } = useQuery({
+    queryKey: ["user-data", user?.email],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/users/${user.email}`);
+      return res.data;
+    },
+    enabled: !!user?.email, 
+  });
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        console.log("User logged out");
+        refetch();
+      })
+      .catch((error) => console.error(error));
+  };
   return (
     <header className="bg-blue-600 text-white py-3 shadow-md">
       <div className="container mx-auto flex justify-between items-center px-4">
-        
         {/* <h1 className="text-xl font-bold">SugerSense</h1> */}
         <SugerSenseLogoIcon></SugerSenseLogoIcon>
         <nav className="flex space-x-4">
@@ -27,8 +49,17 @@ const Navbar = () => {
           <Link to="/api-docs" className="hover:text-gray-200">
             API Docs
           </Link>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+          {user ? (
+            <>
+              <h1>{myData?.name || user.email}</h1>
+              <button onClick={handleLogout}>LogOut</button>
+            </>
+          ) : (
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/register">Register</Link>
+            </>
+          )}
         </nav>
       </div>
     </header>

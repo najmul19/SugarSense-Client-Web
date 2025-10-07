@@ -5,23 +5,31 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
 
 const AuthProvide = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const createUser = (email, pass) => {
+  const createUser = (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, pass);
+    return createUserWithEmailAndPassword(auth, email, password);
   };
-  const signUp = (email, pass) => {
+  const signUp = (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, pass);
+    return signInWithEmailAndPassword(auth, email, password);
   };
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
+  };
+
+  const updateUserProfile = (name) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+    //   photoURL: profile,
+    });
   };
 
   useEffect(() => {
@@ -40,6 +48,7 @@ const AuthProvide = ({ children }) => {
     createUser,
     signUp,
     logOut,
+    updateUserProfile,
   };
   //   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
   return (

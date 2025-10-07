@@ -1,73 +1,73 @@
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
-// import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import SugerSenseLogoIcon from "../../Shared/SugerSenseLogoIcon/SugerSenseLogoIcon";
-// import axiosInstance from "../../api/axiosInstance";
+import axiosInstance from "../../api/axiosInstance";
 import useAuth from "../../api/Hooks/useAuth";
-import { Link } from "react-router-dom";
 
 const Register = () => {
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
   const password = watch("password");
-  // const axiosPublic = axiosInstance();
-  // const navigate = useNavigate();
-  const { createUser } = useAuth();
+  const axiosPublic = axiosInstance;
+  const navigate = useNavigate();
+  const { createUser, updateUserProfile } = useAuth();
   const onSubmit = (data) => {
-    console.log(data);
-    console.log(createUser);
-    
-    // createUser(data.email, data.password)
-    //   .then((res) => {
-    //     const loggedUser = res.user;
-    //     updateUserProfile(data.name, data.photoURL)
-    //       .then(() => {
-    //         const userInfo = {
-    //           name: data.name,
-    //           email: data.email,
-    //           photoURL: data.photoURL,
-    //         };
-    //         axiosPublic.post("/users", userInfo).then((res) => {
-    //           if (res.data.insertedId) {
-    //             reset();
-    //             Swal.fire({
-    //               title: "Welcome to KhabarKuri!",
-    //               text: "Account created successfully",
-    //               icon: "success",
-    //               background: "var(--card-bg)",
-    //               color: "var(--text)",
-    //               confirmButtonColor: "var(--primary)",
-    //             });
-    //             navigate("/");
-    //           }
-    //         });
-    //       })
-    //       .catch((error) => {
-    //         Swal.fire({
-    //           title: "Error",
-    //           text: error.message,
-    //           icon: "error",
-    //           background: "var(--card-bg)",
-    //           color: "var(--text)",
-    //           confirmButtonColor: "var(--error)",
-    //         });
-    //       });
-    //   })
-    //   .catch((error) => {
-    //     Swal.fire({
-    //       title: "Sign Up Failed",
-    //       text: error.message,
-    //       icon: "error",
-    //       background: "var(--card-bg)",
-    //       color: "var(--text)",
-    //       confirmButtonColor: "var(--error)",
-    //     });
-    //   });
+    // console.log(data);
+    // console.log(createUser);
+    createUser(data.email, data.password)
+      .then(() => {
+        // const loggedUse = res.user;
+        updateUserProfile(data.name)
+          .then(() => {
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+              // photoURL: data.photoURL,
+            };
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                reset();
+                Swal.fire({
+                  title: "Welcome to KhabarKuri!",
+                  text: "Account created successfully",
+                  icon: "success",
+                  background: "white",
+                  color: "black",
+                  confirmButtonColor: "green",
+                });
+                navigate("/");
+              }
+            });
+          })
+          .catch((error) => {
+            // console.log(error)
+            Swal.fire({
+              title: "Error",
+              text: error.message,
+              icon: "error",
+              background: "white",
+              color: "black",
+              confirmButtonColor: "red",
+            });
+          });
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Sign Up Failed",
+          text: error.message,
+          icon: "error",
+          background: "white",
+          color: "black",
+          confirmButtonColor: "red",
+        });
+      });
   };
 
   return (
@@ -78,6 +78,13 @@ const Register = () => {
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <input
+          {...register("name", { required: true })}
+          type="text"
+          placeholder="Full Name"
+          className="w-full border rounded-md p-3 focus:ring-2 focus:ring-indigo-500"
+        />
+
         <input
           {...register("email", { required: true })}
           type="email"
