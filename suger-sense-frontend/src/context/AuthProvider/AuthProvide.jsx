@@ -20,6 +20,9 @@ const AuthProvide = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+  const signIn = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
@@ -28,7 +31,7 @@ const AuthProvide = ({ children }) => {
   const updateUserProfile = (name) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
-    //   photoURL: profile,
+      //   photoURL: profile,
     });
   };
 
@@ -47,6 +50,7 @@ const AuthProvide = ({ children }) => {
     user,
     createUser,
     signUp,
+    signIn,
     logOut,
     updateUserProfile,
   };

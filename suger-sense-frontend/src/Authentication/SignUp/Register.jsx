@@ -32,8 +32,12 @@ const Register = () => {
               // photoURL: data.photoURL,
             };
             axiosPublic.post("/users", userInfo).then((res) => {
-              if (res.data.insertedId) {
+                if (res.data.insertedId) {
+                axiosPublic.post("/jwt", { email: data.email }).then((res) => {
+                  localStorage.setItem("access-token", res.data.token);
+                });
                 reset();
+
                 Swal.fire({
                   title: "Welcome to KhabarKuri!",
                   text: "Account created successfully",

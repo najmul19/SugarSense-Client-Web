@@ -1,20 +1,21 @@
 import { Link, NavLink } from "react-router-dom";
 import SugerSenseLogoIcon from "../SugerSenseLogoIcon/SugerSenseLogoIcon";
 import useAuth from "../../api/Hooks/useAuth";
-import axiosInstance from "../../api/axiosInstance";
+
 import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../api/Hooks/useAxiosSecure";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
-  const axiosPublic = axiosInstance;
+  const axiosSecure = useAxiosSecure();
 
   const { data: myData, refetch } = useQuery({
     queryKey: ["user-data", user?.email],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/users/${user.email}`);
+      const res = await axiosSecure.get(`/users/${user.email}`);
       return res.data;
     },
-    enabled: !!user?.email, 
+    enabled: !!user?.email,
   });
 
   const handleLogout = () => {

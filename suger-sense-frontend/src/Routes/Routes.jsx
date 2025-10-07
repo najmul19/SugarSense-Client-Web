@@ -9,6 +9,7 @@ import ApiDocs from "../Pages/ApiDocs/ApiDocs";
 import AuthLayout from "../Layouts/AuthLayout/AuthLayout";
 import Login from "../Authentication/Login/Login";
 import Register from "../Authentication/SignUp/Register";
+import PrivateRout from "./PrivateRout";
 
 export const router = createBrowserRouter([
   {
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "predict",
-        Component: PredictionForm,
+        element: <PrivateRout><PredictionForm></PredictionForm></PrivateRout>
       },
       {
         path: "history",
