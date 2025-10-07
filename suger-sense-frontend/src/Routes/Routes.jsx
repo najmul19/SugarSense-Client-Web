@@ -16,22 +16,33 @@ export const router = createBrowserRouter([
     path: "/",
     Component: RootLayouts,
     children: [
-      
       {
         index: true,
-        Component: Home, 
+        Component: Home,
       },
       {
         path: "predict",
-        element: <PrivateRout><PredictionForm></PredictionForm></PrivateRout>
+        element: (
+          <PrivateRout>
+            <PredictionForm></PredictionForm>
+          </PrivateRout>
+        ),
       },
       {
         path: "history",
-        Component: History,
+        element: (
+          <PrivateRout>
+            <History></History>
+          </PrivateRout>
+        ),
       },
       {
         path: "dashboard",
-        Component: Dashboard,
+        element: (
+          <PrivateRout>
+            <Dashboard></Dashboard>
+          </PrivateRout>
+        ),
       },
       {
         path: "features",
@@ -41,7 +52,7 @@ export const router = createBrowserRouter([
         path: "api-docs",
         Component: ApiDocs,
       },
-    ]
+    ],
   },
   {
     path: "/",
