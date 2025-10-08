@@ -2,8 +2,17 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { FaBrain, FaChartLine, FaShieldAlt, FaHistory } from "react-icons/fa";
+import {
+  FaBrain,
+  FaChartLine,
+  FaShieldAlt,
+  FaHistory,
+  FaUserCircle,
+} from "react-icons/fa";
 import GradientButton from "../../../Shared/Buttons/GradientButton";
+import useAuth from "../../../api/Hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../api/Hooks/useAxiosSecure";
 
 const Home = () => {
   useEffect(() => {
@@ -15,13 +24,41 @@ const Home = () => {
     });
   }, []);
 
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const { data: myData, isLoading } = useQuery({
+    queryKey: ["user-data", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/${user.email}`);
+      return res.data;
+    },
+    enabled: !!user?.email,
+  });
+  if(isLoading){
+    <h2>Loading...</h2>
+  }
+
   return (
     <div className="text-gray-800 overflow-hidden">
       {/* Hero Section */}
       <section
-        className="text-center py-20 card-bg-secondary"
+        className="text-center py-10 card-bg-secondary"
         data-aos="fade-down"
       >
+        {
+  user ? (
+    <h1 className="flex items-center justify-center gap-2 text-xl font-semibold text-[#f1f5f9] px-4 pb-3 rounded-lg">
+      <FaUserCircle className="text-[#b0d4ff] text-2xl" />
+      Welcome, <span className="text-[#dbeafe]">{myData?.name}</span>
+    </h1>
+  ) : (
+    <h1 className="flex items-center justify-center gap-2 text-gray-300 italic px-4 py-2">
+      <FaUserCircle className="text-gray-400 text-xl" />
+      Welcome, Guest
+    </h1>
+  )
+}
+
         <h1 className="text-4xl font-bold mb-4" data-aos="zoom-in">
           Predict Your Diabetes Risk in Seconds
         </h1>
@@ -131,7 +168,11 @@ const Home = () => {
           <h2 className="text-3xl font-semibold mb-6" data-aos="fade-down">
             Tips to Prevent Diabetes
           </h2>
-          <div className="space-y-1 pb-2" data-aos="fade-up" data-aos-delay="100">
+          <div
+            className="space-y-1 pb-2"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             <p>
               • Maintain a balanced diet rich in vegetables and whole grains.
             </p>
@@ -139,7 +180,7 @@ const Home = () => {
             <p>• Avoid smoking and excessive alcohol consumption.</p>
             <p>• Schedule regular health checkups.</p>
           </div>
-          <Link to="diabetesEdu" >
+          <Link to="diabetesEdu">
             <button
               className="bg-gradient-to-b from-[#3b5998] via-[#3b5998] to-[#192f6a] 
                hover:from-[#fafcfd] hover:via-[#eafaf7] hover:to-[#ffe9d6]

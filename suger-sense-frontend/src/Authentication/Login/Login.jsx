@@ -16,7 +16,7 @@ const Login = () => {
   const axiosPublic = axiosInstance;
   const navigate = useNavigate();
   const { signIn } = useAuth();
-   const location = useLocation();
+  const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
 
@@ -73,7 +73,7 @@ const Login = () => {
 
         <button
           type="submit"
-          className="w-full bg-indigo-600 text-white p-3 rounded-md font-semibold hover:bg-indigo-700 transition"
+          className="w-full bg-gradient-to-b from-[#3b5998] via-[#3b5998] to-[#192f6a] hover:from-[#fafcfd] hover:via-[#eafaf7] hover:to-[#ffe9d6] text-white hover:text-blue-600 cursor-pointer p-3 rounded-md font-semibold hover:bg-indigo-700 transition"
         >
           Login
         </button>
@@ -93,7 +93,7 @@ const Login = () => {
 
       <div className="divider text-gray-400 text-sm text-center my-2">OR</div>
 
-      <button className="w-full flex items-center justify-center gap-2 border border-gray-300 p-3 rounded-md hover:bg-gray-100 transition">
+      <button className="w-full flex items-center justify-center cursor-pointer gap-2 border border-gray-300 p-3 rounded-md hover:bg-gray-100 transition">
         <FaGoogle className="text-red-500" /> Continue with Google
       </button>
     </div>

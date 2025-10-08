@@ -11,6 +11,7 @@ import Login from "../Authentication/Login/Login";
 import Register from "../Authentication/SignUp/Register";
 import PrivateRout from "./PrivateRout";
 import DiabetesEducation from "../Pages/DiabetesEducatio/DiabetesEducation";
+import BMICalculator from "../Pages/BMICalculator/BMICalculator";
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
       {
         path: "diabetesEdu",
         Component: DiabetesEducation,
+      },
+      {
+        path: "bmiCalculation",
+        Component: BMICalculator,
       },
     ],
   },

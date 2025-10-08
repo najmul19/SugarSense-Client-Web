@@ -1,65 +1,60 @@
-import { Link, NavLink } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
 import SugerSenseLogoIcon from "../SugerSenseLogoIcon/SugerSenseLogoIcon";
 import useAuth from "../../api/Hooks/useAuth";
 
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../api/Hooks/useAxiosSecure";
-
 const Navbar = () => {
   const { user, logOut } = useAuth();
-  const axiosSecure = useAxiosSecure();
-
-  const { data: myData, refetch } = useQuery({
-    queryKey: ["user-data", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/users/${user.email}`);
-      return res.data;
-    },
-    enabled: !!user?.email,
-  });
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
-    logOut()
-      .then(() => {
-        console.log("User logged out");
-        refetch();
-      })
-      .catch((error) => console.error(error));
+    logOut().then(() => console.log("User logged out")).catch(console.error);
   };
+
   return (
-    <header className="sticky z-40 top-0 bg-gradient-to-r from-[#4c669f] via-[#3b5998] to-[#192f6a] text-white py-3 shadow-md">
+    <header className="sticky top-0 z-40 bg-gradient-to-r from-[#4c669f] via-[#3b5998] to-[#192f6a] text-white py-3 shadow-md">
       <div className="container mx-auto flex justify-between items-center px-4">
-        {/* <h1 className="text-xl font-bold">SugerSense</h1> */}
-        <SugerSenseLogoIcon></SugerSenseLogoIcon>
-        <nav className="flex space-x-4 ">
-          <Link to="/" className="hover:text-gray-200">
-            Home
-          </Link>
-          <Link to="/predict" className="hover:text-gray-200">
-            Predict
-          </Link>
-          <Link to="/history" className="hover:text-gray-200">
-            History
-          </Link>
-          <Link to='/diabetesEdu' >DiabetesTips</Link>
-          <Link to="/dashboard" className="hover:text-gray-200">
-            Dashboard
-          </Link>
-          <Link to="/features" className="hover:text-gray-200">
-            Feature Importance
-          </Link>
-          <Link to="/api-docs" className="hover:text-gray-200">
-            API Docs
-          </Link>
+        {/* Logo */}
+        <SugerSenseLogoIcon />
+
+        {/* Hamburger Icon (Mobile) */}
+        <button
+          className="md:hidden text-2xl focus:outline-none"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+
+        {/* Navigation Links */}
+        <nav
+          className={`absolute md:static top-full left-0 w-full md:w-auto  md:bg-transparent flex flex-col md:flex-row items-center md:space-x-6 space-y-4 md:space-y-0 py-4 md:py-0 transition-all duration-300 ease-in-out ${
+            menuOpen ? "block" : "hidden md:flex"
+          }`}
+        >
+          <Link to="/" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link to="/predict" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>Predict</Link>
+          <Link to="/history" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>History</Link>
+          <Link to="/bmiCalculation" onClick={() => setMenuOpen(false)}>BMI Calculator</Link>
+          <Link to="/diabetesEdu" onClick={() => setMenuOpen(false)}>DiabetesTips</Link>
+          <Link to="/dashboard" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>Dashboard</Link>
+          <Link to="/features" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>Feature Importance</Link>
+          <Link to="/api-docs" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>API Docs</Link>
+
           {user ? (
-            <>
-              <h1>{myData?.name || user.email}</h1>
-              <button onClick={handleLogout}>LogOut</button>
-            </>
+            <button
+              onClick={() => {
+                handleLogout();
+                setMenuOpen(false);
+              }}
+              className="hover:text-gray-200"
+            >
+              Logout
+            </button>
           ) : (
             <>
-              <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
+              <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link>
+              <Link to="/register" onClick={() => setMenuOpen(false)}>Register</Link>
             </>
           )}
         </nav>

@@ -5,16 +5,17 @@ import "aos/dist/aos.css";
 import useAuth from "../../api/Hooks/useAuth";
 import useAxiosSecure from "../../api/Hooks/useAxiosSecure";
 import "../../globals.css";
+import { FaListAlt } from "react-icons/fa";
 
 const History = () => {
   useEffect(() => {
     AOS.init({
       duration: 800,
-      once: true, 
-      offset: 100, 
+      once: true,
+      offset: 100,
       easing: "ease-in-out",
     });
-    AOS.refresh(); 
+    AOS.refresh();
   }, []);
 
   const { user } = useAuth();
@@ -62,10 +63,11 @@ const History = () => {
   return (
     <div className="max-w-5xl mx-auto p-4 mt-10" data-aos="fade-up">
       <h2
-        className="text-2xl font-bold text-center mb-8 text-blue-700"
+        className="flex items-center justify-center gap-2 text-2xl font-bold text-center mb-8 text-blue-700"
         data-aos="fade-down"
       >
-        🧾 Your Prediction History
+        <FaListAlt className="text-[#b0d4ff] text-2xl" />
+        Your Prediction History
       </h2>
 
       <div className="overflow-x-auto" data-aos="fade-up">
