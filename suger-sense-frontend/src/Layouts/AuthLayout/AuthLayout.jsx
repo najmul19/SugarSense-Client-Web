@@ -19,9 +19,9 @@ const AuthLayout = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row card-bg-n">
 
-      {/* Left / Right side changes dynamically */}
+      {/* Left / Right side*/}
       <div
-        data-aos="fade-right"
+        data-aos="fade-right" 
         className={`flex-1 flex flex-col justify-center items-center p-10 ${
           isLogin ? "order-1 md:order-none" : "md:order-2"
         }`}
@@ -54,7 +54,7 @@ const AuthLayout = () => {
       {/* Login/Register Form Area */}
       <div
         data-aos="fade-left"
-        className={`flex-1 flex justify-center items-center bg-white shadow-xl p-8 ${
+        className={`flex-1 flex justify-center items-center  p-8 ${
           isLogin ? "order-2 md:order-none" : "md:order-1"
         }`}
       >

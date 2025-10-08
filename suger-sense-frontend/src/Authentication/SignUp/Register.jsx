@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import SugerSenseLogoIcon from "../../Shared/SugerSenseLogoIcon/SugerSenseLogoIcon";
 import axiosInstance from "../../api/axiosInstance";
 import useAuth from "../../api/Hooks/useAuth";
+import SocialLogin from "../SocialLogin/SocilaLogin";
 
 const Register = () => {
   const {
@@ -146,9 +147,10 @@ const Register = () => {
 
       <div className="divider text-gray-400 text-sm text-center my-2">OR</div>
 
-      <button className="w-full flex items-center justify-center gap-2 border cursor-pointer border-gray-300 p-3 rounded-md hover:bg-gray-100 transition">
+      {/* <button className="w-full flex items-center justify-center gap-2 border cursor-pointer border-gray-300 p-3 rounded-md hover:bg-gray-100 transition">
         <FaGoogle className="text-red-500" /> Continue with Google
-      </button>
+      </button> */}
+      <SocialLogin></SocialLogin>
     </div>
   );
 };
