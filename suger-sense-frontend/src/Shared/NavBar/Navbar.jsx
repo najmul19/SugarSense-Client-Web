@@ -35,19 +35,21 @@ const Navbar = () => {
           data-aos="fade-left"
         >
           <div className="bg-gradient-to-b from-[#fafcfd] via-[#eafaf7] to-[#ffe9d6] hover:from-[#4c669f] hover:via-[#3b5998] hover:to-[#192f6a] p-2 rounded-lg shadow-md group-hover:scale-105 transition-transform duration-300">
-            <Droplet className="text-blue-600 w-6 h-6 font-bold"  />
+            <Droplet className="text-blue-600 w-6 h-6 font-bold" />
           </div>
 
           {/* Text */}
-          <h1 className="text-2xl font-extrabold bg-gradient-to-b from-[#fafcfd] via-[#eafaf7] to-[#ffe9d6]
-                 hover:from-[#4c669f] hover:via-[#3b5998] hover:to-[#192f6a] text-transparent bg-clip-text tracking-wide">
+          <h1
+            className="text-2xl font-extrabold bg-gradient-to-b from-[#fafcfd] via-[#eafaf7] to-[#ffe9d6]
+                 hover:from-[#4c669f] hover:via-[#3b5998] hover:to-[#192f6a] text-transparent bg-clip-text tracking-wide"
+          >
             SugerSense
           </h1>
         </Link>
 
         {/* Hamburger Icon (Mobile) */}
         <button
-          className="md:hidden text-2xl focus:outline-none"
+          className="lg:hidden text-2xl focus:outline-none"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <FaTimes /> : <FaBars />}
@@ -55,26 +57,17 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <nav
-          className={`absolute md:static top-full left-0 w-full md:w-auto  md:bg-transparent flex flex-col md:flex-row items-center md:space-x-6 space-y-4 md:space-y-0 py-4 md:py-0 transition-all duration-300 ease-in-out ${
-            menuOpen ? "block" : "hidden md:flex"
+          className={`absolute lg:static top-full left-0 w-full lg:w-auto  lg:bg-transparent flex flex-col lg:flex-row items-center lg:space-x-6 space-y-4 lg:space-y-0 py-4 lg:py-0 transition-all duration-300 ease-in-out ${
+            menuOpen ? "block bg-[#192f6a]" : "hidden lg:flex"
           }`}
         >
-          <Link
-            to="/"
-            className=" "
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link to="/" className=" " onClick={() => setMenuOpen(false)}>
             Home
           </Link>
-          <Link
-            to="/predict"
-            className=" "
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link to="/predict" className=" " onClick={() => setMenuOpen(false)}>
             Predict
           </Link>
-{/* bg-gradient-to-b from-[#fafcfd] via-[#eafaf7] to-[#ffe9d6]
-                 hover:from-[#4c669f] hover:via-[#3b5998] hover:to-[#192f6a] */}
+
           <Link
             to="/history"
             className="hover:text-gray-200 "
@@ -82,10 +75,18 @@ const Navbar = () => {
           >
             History
           </Link>
-          <Link to="/bmiCalculation" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>
+          <Link
+            to="/bmiCalculation"
+            className="hover:text-gray-200"
+            onClick={() => setMenuOpen(false)}
+          >
             BMI Calculator
           </Link>
-          <Link to="/diabetesEdu" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>
+          <Link
+            to="/diabetesEdu"
+            className="hover:text-gray-200"
+            onClick={() => setMenuOpen(false)}
+          >
             DiabetesTips
           </Link>
           {isAdmin ? (
@@ -119,10 +120,18 @@ const Navbar = () => {
             </button>
           ) : (
             <>
-              <Link to="/login" className="hover:text-gray-200 cursor-pointer" onClick={() => setMenuOpen(false)}>
+              <Link
+                to="/login"
+                className="hover:text-gray-200 cursor-pointer"
+                onClick={() => setMenuOpen(false)}
+              >
                 Login
               </Link>
-              <Link to="/register" className="hover:text-gray-200 cursor-pointer" onClick={() => setMenuOpen(false)}>
+              <Link
+                to="/register"
+                className="hover:text-gray-200 cursor-pointer"
+                onClick={() => setMenuOpen(false)}
+              >
                 Register
               </Link>
             </>

@@ -42,22 +42,26 @@ const DashboardLayout = () => {
       </header>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden fixed top-0 left-0 right-0 z-40 bg-gradient-to-b from-[#4c669f] via-[#3b5998] to-[#192f6a] text-white p-6 flex flex-col space-y-4 pt-16">
-          <Link to="/dashboard" onClick={() => setIsOpen(false)}>
-            Dashboard Home
-          </Link>
-          <Link to="/dashboard/manage-users" onClick={() => setIsOpen(false)}>
-            Manage Users
-          </Link>
-          <Link to="/dashboard/api-docs" onClick={() => setIsOpen(false)}>
-            API Docs
-          </Link>
-          <Link to="/">
-            <GradientButton text="Back to Home"></GradientButton>
-          </Link>
-        </div>
-      )}
+      <div
+        className={`md:hidden fixed top-0 left-0 right-0 z-40 bg-gradient-to-b from-[#4c669f] via-[#3b5998] to-[#192f6a] text-white p-6 flex flex-col space-y-4 pt-16 transform transition-all duration-500 ease-in-out ${
+          isOpen
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-full opacity-0 pointer-events-none"
+        }`}
+      >
+        <Link to="/dashboard" onClick={() => setIsOpen(false)}>
+          Dashboard Home
+        </Link>
+        <Link to="/dashboard/manage-users" onClick={() => setIsOpen(false)}>
+          Manage Users
+        </Link>
+        <Link to="/dashboard/api-docs" onClick={() => setIsOpen(false)}>
+          API Docs
+        </Link>
+        <Link to="/" onClick={() => setIsOpen(false)}>
+          <GradientButton text="Back to Home" />
+        </Link>
+      </div>
 
       {/* Main Content */}
       <main className="flex-1 p-4 md:p-6 overflow-y-auto">
