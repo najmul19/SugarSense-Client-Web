@@ -4,15 +4,19 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { FaUserShield, FaUser, FaEnvelope } from "react-icons/fa";
 import useAxiosSecure from "../../api/Hooks/useAxiosSecure";
-import useAuth from "../../api/Hooks/useAuth"; 
+import useAuth from "../../api/Hooks/useAuth";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth(); 
+  const { user } = useAuth();
   const queryClient = useQueryClient();
   const [updatingUserId, setUpdatingUserId] = useState(null);
 
-  const { data: users = [], isLoading, isError } = useQuery({
+  const {
+    data: users = [],
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["allUsers"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
@@ -60,10 +64,11 @@ const ManageUsers = () => {
       </h2>
 
       <div
-        className="overflow-x-auto bg-white rounded-lg shadow-md border border-gray-200"
+        className="bg-white rounded-lg shadow-md border border-gray-200 overflow-x-auto"
         data-aos="fade-up"
       >
-        <table className="min-w-full text-sm md:text-base border-collapse">
+        {/* Table for medium+ screens */}
+        <table className="hidden md:table w-full text-sm border-collapse">
           <thead className="bg-[#3b5998] text-white">
             <tr>
               <th className="py-3 px-4 text-left w-12">#</th>
@@ -80,22 +85,15 @@ const ManageUsers = () => {
                 key={u._id}
                 className="border-b hover:bg-blue-50 transition duration-200"
               >
-                <td className="py-3 px-4 font-medium text-gray-700">
-                  {index + 1}
+                <td className="py-3 px-4 font-medium">{index + 1}</td>
+                <td className="py-3 px-4 flex items-center gap-2 text-gray-800">
+                  <FaUser className="text-[#3b5998]" />
+                  {u.name || "Unknown"}
                 </td>
-
-                <td className="py-3 px-4 flex items-center gap-2 text-gray-800 whitespace-nowrap">
-                  <FaUser className="text-[#3b5998] shrink-0" />
-                  <span>{u.name || "Unknown"}</span>
-                </td>
-
                 <td className="py-3 px-4 text-gray-700 break-all">
-                  <div className="flex items-center gap-2">
-                    <FaEnvelope className="text-gray-400 shrink-0" />
-                    <span>{u.email}</span>
-                  </div>
+                  <FaEnvelope className="inline mr-2 text-gray-400" />
+                  {u.email}
                 </td>
-
                 <td className="py-3 px-4 font-medium">
                   {u.role === "admin" ? (
                     <span className="flex items-center gap-1 text-green-600">
@@ -107,37 +105,31 @@ const ManageUsers = () => {
                     </span>
                   )}
                 </td>
-
                 <td className="py-3 px-4 text-center">
                   {user?.email === u.email ? (
-                    <span className="text-gray-400 italic text-sm">
-                      (You)
-                    </span>
-                  ) : u.role === "admin" ? (
-                    <button
-                      disabled={updatingUserId === u._id}
-                      onClick={() => updateRole({ id: u._id, role: "user" })}
-                      className={`px-4 py-1.5 rounded-md text-white font-medium transition ${
-                        updatingUserId === u._id
-                          ? "bg-gray-400 cursor-not-allowed"
-                          : "bg-red-500 hover:bg-red-600"
-                      }`}
-                    >
-                      {updatingUserId === u._id ? "Updating..." : "Demote"}
-                    </button>
+                    <span className="text-gray-400 italic text-sm">(You)</span>
                   ) : (
                     <button
                       disabled={updatingUserId === u._id}
                       onClick={() =>
-                        updateRole({ id: u._id, role: "admin" })
+                        updateRole({
+                          id: u._id,
+                          role: u.role === "admin" ? "user" : "admin",
+                        })
                       }
                       className={`px-4 py-1.5 rounded-md text-white font-medium transition ${
                         updatingUserId === u._id
                           ? "bg-gray-400 cursor-not-allowed"
+                          : u.role === "admin"
+                          ? "bg-red-500 hover:bg-red-600"
                           : "bg-green-500 hover:bg-green-600"
                       }`}
                     >
-                      {updatingUserId === u._id ? "Updating..." : "Promote"}
+                      {updatingUserId === u._id
+                        ? "Updating..."
+                        : u.role === "admin"
+                        ? "Demote"
+                        : "Promote"}
                     </button>
                   )}
                 </td>
@@ -145,6 +137,67 @@ const ManageUsers = () => {
             ))}
           </tbody>
         </table>
+
+        {/* Card layout for small screens */}
+        <div className="md:hidden divide-y">
+          {users.map((u, index) => (
+            <div key={u._id} className="p-4">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-sm font-semibold text-gray-500">
+                  #{index + 1}
+                </span>
+                {user?.email === u.email && (
+                  <span className="text-gray-400 italic text-xs">(You)</span>
+                )}
+              </div>
+
+              <div className="flex items-center gap-2 mb-1">
+                <FaUser className="text-[#3b5998]" />
+                <span className="font-medium">{u.name || "Unknown"}</span>
+              </div>
+
+              <div className="flex items-center gap-2 mb-1 text-sm text-gray-700">
+                <FaEnvelope className="text-gray-400" />
+                {u.email}
+              </div>
+
+              <div className="flex items-center gap-2 mb-2">
+                {u.role === "admin" ? (
+                  <span className="flex items-center gap-1 text-green-600">
+                    <FaUserShield /> Admin
+                  </span>
+                ) : (
+                  <span className="text-gray-600 flex items-center gap-1">
+                    <FaUser /> User
+                  </span>
+                )}
+              </div>
+
+              <button
+                disabled={updatingUserId === u._id}
+                onClick={() =>
+                  updateRole({
+                    id: u._id,
+                    role: u.role === "admin" ? "user" : "admin",
+                  })
+                }
+                className={`w-full py-2 rounded-md text-white font-medium transition ${
+                  updatingUserId === u._id
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : u.role === "admin"
+                    ? "bg-red-500 hover:bg-red-600"
+                    : "bg-green-500 hover:bg-green-600"
+                }`}
+              >
+                {updatingUserId === u._id
+                  ? "Updating..."
+                  : u.role === "admin"
+                  ? "Demote"
+                  : "Promote"}
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

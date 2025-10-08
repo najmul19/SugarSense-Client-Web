@@ -56,10 +56,10 @@ const History = () => {
 
   if (!predictions.length) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[70vh] text-gray-500" >
+      <div className="flex flex-col items-center justify-center min-h-[70vh] text-gray-500">
         <p data-aos="zoom-in">You haven't made any predictions yet.</p>
         <Link
-        data-aos="zoom-out"
+          data-aos="zoom-out"
           to="/predict"
           className="inline-block mt-3 text-blue-600 font-medium hover:underline"
         >
@@ -79,9 +79,13 @@ const History = () => {
         Your Prediction History
       </h2>
 
-      <div className="overflow-x-auto" data-aos="fade-up">
-        <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
-          <thead className="card-bg-secondary text-white">
+      <div
+        className="bg-white rounded-lg shadow-md border border-gray-200 overflow-x-auto"
+        data-aos="fade-up"
+      >
+        {/* Desktop / Tablet Table */}
+        <table className="hidden md:table w-full text-sm border-collapse">
+          <thead className="bg-[#3b5998] text-white">
             <tr>
               <th className="py-3 px-4 text-left">#</th>
               <th className="py-3 px-4 text-left">Inputs</th>
@@ -125,6 +129,51 @@ const History = () => {
             ))}
           </tbody>
         </table>
+
+        {/* Mobile Card Layout */}
+        <div className="md:hidden divide-y">
+          {predictions.map((p, index) => (
+            <div
+              key={p._id}
+              className="p-4"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
+              <div className="flex justify-between items-center mb-2">
+                <span className="font-semibold text-gray-600">
+                  #{index + 1}
+                </span>
+                <span
+                  className={`font-semibold ${
+                    p.prediction === "Diabetic"
+                      ? "text-red-600"
+                      : "text-green-600"
+                  }`}
+                >
+                  {p.prediction}
+                </span>
+              </div>
+
+              <div className="text-sm text-gray-700 mb-2">
+                <span className="font-medium text-gray-600">Inputs: </span>
+                {Object.entries(p)
+                  .filter(
+                    ([key]) =>
+                      !["prediction", "email", "createdAt", "_id"].includes(key)
+                  )
+                  .map(([key, value]) => (
+                    <div key={key}>
+                      <span className="capitalize">{key}</span>: {value}
+                    </div>
+                  ))}
+              </div>
+
+              <div className="text-xs text-gray-500">
+                {new Date(p.createdAt).toLocaleString()}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
