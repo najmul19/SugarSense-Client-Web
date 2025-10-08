@@ -29,11 +29,22 @@ const FeatureImportance = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // const { data, isLoading, isError } = useQuery({
+  //   queryKey: ["feature-importance"],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get("/feature-importance");
+  //     return res.data.data;
+  //   },
+  // });
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["feature-importance"],
     queryFn: async () => {
       const res = await axiosSecure.get("/feature-importance");
-      return res.data.data;
+      const d = res.data.data;
+      console.log(d)
+      // convert object to array if needed
+      return Array.isArray(d) ? d : Object.values(d);
     },
   });
 

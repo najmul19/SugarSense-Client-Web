@@ -15,7 +15,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logOut()
-      .then(() => console.log("User logged out"))
+      .then(() => {})
       .catch(console.error);
   };
   // console.log(isAdmin)
@@ -89,6 +89,13 @@ const Navbar = () => {
           >
             DiabetesTips
           </Link>
+          <Link
+            to="/features"
+            className="hover:text-gray-200 "
+            onClick={() => setMenuOpen(false)}
+          >
+            Feature Importance
+          </Link>
           {isAdmin ? (
             <Link
               to="/dashboard"
@@ -100,13 +107,6 @@ const Navbar = () => {
           ) : (
             ""
           )}
-          <Link
-            to="/features"
-            className="hover:text-gray-200 "
-            onClick={() => setMenuOpen(false)}
-          >
-            Feature Importance
-          </Link>
 
           {user ? (
             <button

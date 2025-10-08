@@ -3,7 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000/api",
+  // baseURL: "http://localhost:5000/api",
+  baseURL: "https://sugarsense-server-web.onrender.com/api",
 });
 const useAxiosSecure = () => {
   const navigate = useNavigate();
