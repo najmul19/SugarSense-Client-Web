@@ -3,20 +3,47 @@ import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import SugerSenseLogoIcon from "../SugerSenseLogoIcon/SugerSenseLogoIcon";
 import useAuth from "../../api/Hooks/useAuth";
+import useAdmin from "../../api/Hooks/useAdmin";
+import LoadingSpinner from "../LoadingSpinner";
+import { Droplet } from "lucide-react";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const [isAdmin, isAdminLoading] = useAdmin();
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
-    logOut().then(() => console.log("User logged out")).catch(console.error);
+    logOut()
+      .then(() => console.log("User logged out"))
+      .catch(console.error);
   };
+  // console.log(isAdmin)
+  // if (isAdminLoading) return <LoadingSpinner text="Checking admin access..." />;
 
   return (
-    <header className="sticky top-0 z-40 bg-gradient-to-r from-[#4c669f] via-[#3b5998] to-[#192f6a] text-white py-3 shadow-md">
+    <header className="sticky top-0 z-40 bg-gradient-to-r from-[#6377a3] via-[#3b5998] to-[#192f6a] text-white py-3 shadow-md">
       <div className="container mx-auto flex justify-between items-center px-4">
         {/* Logo */}
-        <SugerSenseLogoIcon />
+
+        {/* bg-gradient-to-b from-[#fafcfd] via-[#eafaf7] to-[#ffe9d6]
+                 hover:from-[#4c669f] hover:via-[#3b5998] hover:to-[#192f6a]
+                 text-blue-600 hover:text-white */}
+        <Link
+          to="/"
+          className="flex items-center gap-2 group select-none"
+          data-aos="fade-left"
+        >
+          <div className="bg-gradient-to-b from-[#fafcfd] via-[#eafaf7] to-[#ffe9d6] hover:from-[#4c669f] hover:via-[#3b5998] hover:to-[#192f6a] p-2 rounded-lg shadow-md group-hover:scale-105 transition-transform duration-300">
+            <Droplet className="text-blue-600 w-6 h-6 font-bold"  />
+          </div>
+
+          {/* Text */}
+          <h1 className="text-2xl font-extrabold bg-gradient-to-b from-[#fafcfd] via-[#eafaf7] to-[#ffe9d6]
+                 hover:from-[#4c669f] hover:via-[#3b5998] hover:to-[#192f6a] text-transparent bg-clip-text tracking-wide">
+            SugerSense
+          </h1>
+        </Link>
 
         {/* Hamburger Icon (Mobile) */}
         <button
@@ -32,14 +59,53 @@ const Navbar = () => {
             menuOpen ? "block" : "hidden md:flex"
           }`}
         >
-          <Link to="/" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link to="/predict" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>Predict</Link>
-          <Link to="/history" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>History</Link>
-          <Link to="/bmiCalculation" onClick={() => setMenuOpen(false)}>BMI Calculator</Link>
-          <Link to="/diabetesEdu" onClick={() => setMenuOpen(false)}>DiabetesTips</Link>
-          <Link to="/dashboard" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>Dashboard</Link>
-          <Link to="/features" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>Feature Importance</Link>
-          <Link to="/api-docs" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>API Docs</Link>
+          <Link
+            to="/"
+            className=" "
+            onClick={() => setMenuOpen(false)}
+          >
+            Home
+          </Link>
+          <Link
+            to="/predict"
+            className=" "
+            onClick={() => setMenuOpen(false)}
+          >
+            Predict
+          </Link>
+{/* bg-gradient-to-b from-[#fafcfd] via-[#eafaf7] to-[#ffe9d6]
+                 hover:from-[#4c669f] hover:via-[#3b5998] hover:to-[#192f6a] */}
+          <Link
+            to="/history"
+            className="hover:text-gray-200 "
+            onClick={() => setMenuOpen(false)}
+          >
+            History
+          </Link>
+          <Link to="/bmiCalculation" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>
+            BMI Calculator
+          </Link>
+          <Link to="/diabetesEdu" className="hover:text-gray-200" onClick={() => setMenuOpen(false)}>
+            DiabetesTips
+          </Link>
+          {isAdmin ? (
+            <Link
+              to="/dashboard"
+              className="hover:text-gray-200 "
+              onClick={() => setMenuOpen(false)}
+            >
+              Dashboard
+            </Link>
+          ) : (
+            ""
+          )}
+          <Link
+            to="/features"
+            className="hover:text-gray-200 "
+            onClick={() => setMenuOpen(false)}
+          >
+            Feature Importance
+          </Link>
 
           {user ? (
             <button
@@ -47,14 +113,18 @@ const Navbar = () => {
                 handleLogout();
                 setMenuOpen(false);
               }}
-              className="hover:text-gray-200"
+              className="hover:text-gray-200 cursor-pointer "
             >
               Logout
             </button>
           ) : (
             <>
-              <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link>
-              <Link to="/register" onClick={() => setMenuOpen(false)}>Register</Link>
+              <Link to="/login" className="hover:text-gray-200 cursor-pointer" onClick={() => setMenuOpen(false)}>
+                Login
+              </Link>
+              <Link to="/register" className="hover:text-gray-200 cursor-pointer" onClick={() => setMenuOpen(false)}>
+                Register
+              </Link>
             </>
           )}
         </nav>

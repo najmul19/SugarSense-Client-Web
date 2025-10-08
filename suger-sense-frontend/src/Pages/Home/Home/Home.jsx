@@ -13,6 +13,7 @@ import GradientButton from "../../../Shared/Buttons/GradientButton";
 import useAuth from "../../../api/Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../api/Hooks/useAxiosSecure";
+import LoadingSpinner from "../../../Shared/LoadingSpinner";
 
 const Home = () => {
   useEffect(() => {
@@ -35,7 +36,7 @@ const Home = () => {
     enabled: !!user?.email,
   });
   if(isLoading){
-    <h2>Loading...</h2>
+    <LoadingSpinner text="Loading Home content"></LoadingSpinner>
   }
 
   return (

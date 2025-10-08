@@ -12,6 +12,9 @@ import Register from "../Authentication/SignUp/Register";
 import PrivateRout from "./PrivateRout";
 import DiabetesEducation from "../Pages/DiabetesEducatio/DiabetesEducation";
 import BMICalculator from "../Pages/BMICalculator/BMICalculator";
+import ManageUsers from "../Pages/ManageUsers/ManageUsers";
+import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -38,22 +41,22 @@ export const router = createBrowserRouter([
           </PrivateRout>
         ),
       },
-      {
-        path: "dashboard",
-        element: (
-          <PrivateRout>
-            <Dashboard></Dashboard>
-          </PrivateRout>
-        ),
-      },
+      // {
+      //   path: "dashboard",
+      //   element: (
+      //     <PrivateRout>
+      //       <Dashboard></Dashboard>
+      //     </PrivateRout>
+      //   ),
+      // },
       {
         path: "features",
         Component: FeatureImportance,
       },
-      {
-        path: "api-docs",
-        Component: ApiDocs,
-      },
+      // {
+      //   path: "api-docs",
+      //   Component: ApiDocs,
+      // },
       {
         path: "diabetesEdu",
         Component: DiabetesEducation,
@@ -62,6 +65,10 @@ export const router = createBrowserRouter([
         path: "bmiCalculation",
         Component: BMICalculator,
       },
+      // {
+      //   path: "manageUsers",
+      //   Component: ManageUsers,
+      // },
     ],
   },
   {
@@ -72,4 +79,27 @@ export const router = createBrowserRouter([
       { path: "register", Component: Register },
     ],
   },
+  {
+  path: "/dashboard",
+  element: (
+    <AdminRoute>
+      <DashboardLayout />
+    </AdminRoute>
+  ),
+  children: [
+    {
+      index: true,
+      Component: Dashboard,
+    },
+    {
+      path: "manage-users",
+      Component: ManageUsers,
+    },
+    {
+      path: "api-docs",
+      Component: ApiDocs,
+    },
+  ],
+}
+
 ]);

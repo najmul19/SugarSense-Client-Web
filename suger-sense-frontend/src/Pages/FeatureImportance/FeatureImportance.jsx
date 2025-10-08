@@ -12,6 +12,7 @@ import {
 import AOS from "aos";
 import "aos/dist/aos.css";
 import useAxiosSecure from "../../api/Hooks/useAxiosSecure";
+import LoadingSpinner from "../../Shared/LoadingSpinner";
 
 const FeatureImportance = () => {
   const axiosSecure = useAxiosSecure();
@@ -30,7 +31,7 @@ const FeatureImportance = () => {
     },
   });
 
-  if (isLoading) return <p className="text-center py-10">Loading...</p>;
+  if (isLoading) return <LoadingSpinner text="Loading Feature Improtance"></LoadingSpinner>
   if (isError)
     return <p className="text-center py-10 text-red-500">Error loading data</p>;
 

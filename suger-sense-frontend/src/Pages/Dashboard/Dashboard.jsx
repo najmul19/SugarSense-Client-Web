@@ -12,11 +12,17 @@ import {
   Legend,
   Bar,
 } from "recharts";
-import { FaUsers, FaHeartbeat, FaChartBar, FaClipboardCheck } from "react-icons/fa";
+import {
+  FaUsers,
+  FaHeartbeat,
+  FaChartBar,
+  FaClipboardCheck,
+} from "react-icons/fa";
 import { motion } from "framer-motion";
 import useAxiosSecure from "../../api/Hooks/useAxiosSecure";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import LoadingSpinner from "../../Shared/LoadingSpinner";
 
 const COLORS = ["#EF4444", "#10B981"];
 
@@ -36,15 +42,16 @@ const Dashboard = () => {
   });
 
   if (isLoading)
+    return <LoadingSpinner text="Analyzing dashboard data..."></LoadingSpinner>;
+  if (isError)
     return (
-      <p className="text-center py-10 text-gray-500 animate-pulse">
-        Analyzing dashboard data...
+      <p className="text-center py-10 text-red-500">
+        Error loading dashboard data.
       </p>
     );
-  if (isError)
-    return <p className="text-center py-10 text-red-500">Error loading dashboard data.</p>;
 
-  const { totalUsers, totalPredictions, diabeticCount, nonDiabeticCount } = data;
+  const { totalUsers, totalPredictions, diabeticCount, nonDiabeticCount } =
+    data;
 
   const pieData = [
     { name: "Diabetic", value: diabeticCount },
@@ -135,7 +142,10 @@ const Dashboard = () => {
                 dataKey="value"
               >
                 {pieData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
                 ))}
               </Pie>
               <Tooltip />

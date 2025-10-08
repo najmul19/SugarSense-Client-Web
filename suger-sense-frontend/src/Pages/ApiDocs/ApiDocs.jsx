@@ -19,7 +19,6 @@ const ApiDocs = () => {
         return;
       }
 
-
       const filteredPredictions = predictions.map(
         ({ _id, email, createdAt, ...keep }) => keep
       );
@@ -49,17 +48,24 @@ const ApiDocs = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6">
-      <h1 className="text-3xl font-bold mb-6">
+    <div
+      className="min-h-screen flex flex-col items-center justify-center p-6"
+      data-aos="fade-up"
+    >
+      <h1 className="text-3xl font-bold mb-6" data-aos="zoom-in">
         API Documentation / Export Data
       </h1>
-      <p className="mb-4 text-gray-600 text-center max-w-md">
+      <p
+        className="mb-4 text-gray-600 text-center max-w-md"
+        data-aos="fade-right"
+        data-aos-delay="200"
+      >
         Admin can export all prediction data as CSV for research purposes.
       </p>
-      {/* from-[#fafcfd] via-[#eafaf7] to-[#ffe9d6] */}
-      {/* hover:from-[#4c669f] hover:via-[#3b5998] hover:to-[#192f6a] */}
       <button
         onClick={exportCSV}
+        data-aos="flip-left"
+        data-aos-delay="400"
         className="bg-gradient-to-b from-[#4c669f] via-[#3b5998] to-[#192f6a] hover:from-[#fafcfd] hover:via-[#eafaf7] hover:to-[#ffe9d6] text-white hover:text-blue-600 px-6 py-3 rounded-lg cursor-pointer shadow-md"
         disabled={loading}
       >

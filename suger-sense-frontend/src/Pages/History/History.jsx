@@ -6,6 +6,8 @@ import useAuth from "../../api/Hooks/useAuth";
 import useAxiosSecure from "../../api/Hooks/useAxiosSecure";
 import "../../globals.css";
 import { FaListAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import CustomButton from "../../Shared/Buttons/CustomButton";
 
 const History = () => {
   useEffect(() => {
@@ -54,8 +56,15 @@ const History = () => {
 
   if (!predictions.length) {
     return (
-      <div className="text-center text-gray-500 mt-10" data-aos="zoom-in">
-        You haven’t made any predictions yet.
+      <div className="flex flex-col items-center justify-center min-h-[70vh] text-gray-500" >
+        <p data-aos="zoom-in">You haven't made any predictions yet.</p>
+        <Link
+        data-aos="zoom-out"
+          to="/predict"
+          className="inline-block mt-3 text-blue-600 font-medium hover:underline"
+        >
+          <CustomButton text="Make your first prediction →"></CustomButton>
+        </Link>
       </div>
     );
   }
