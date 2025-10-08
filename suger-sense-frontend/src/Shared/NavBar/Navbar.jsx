@@ -41,6 +41,7 @@ const Navbar = () => {
           <Link to="/history" className="hover:text-gray-200">
             History
           </Link>
+          <Link to='/diabetesEdu' >DiabetesTips</Link>
           <Link to="/dashboard" className="hover:text-gray-200">
             Dashboard
           </Link>

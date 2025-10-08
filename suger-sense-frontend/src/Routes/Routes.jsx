@@ -10,6 +10,7 @@ import AuthLayout from "../Layouts/AuthLayout/AuthLayout";
 import Login from "../Authentication/Login/Login";
 import Register from "../Authentication/SignUp/Register";
 import PrivateRout from "./PrivateRout";
+import DiabetesEducation from "../Pages/DiabetesEducatio/DiabetesEducation";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
       {
         path: "api-docs",
         Component: ApiDocs,
+      },
+      {
+        path: "diabetesEdu",
+        Component: DiabetesEducation,
       },
     ],
   },

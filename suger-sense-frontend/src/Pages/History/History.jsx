@@ -4,14 +4,22 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import useAuth from "../../api/Hooks/useAuth";
 import useAxiosSecure from "../../api/Hooks/useAxiosSecure";
-import '../../globals.css';
+import "../../globals.css";
 
 const History = () => {
   useEffect(() => {
-    AOS.init({ duration: 800, once: true });
+    AOS.init({
+      duration: 800,
+      once: true, 
+      offset: 100, 
+      easing: "ease-in-out",
+    });
+    AOS.refresh(); 
   }, []);
+
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+
   const {
     data: predictions = [],
     isLoading,
@@ -26,7 +34,10 @@ const History = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen text-lg font-medium">
+      <div
+        className="flex justify-center items-center h-screen text-lg font-medium"
+        data-aos="fade-in"
+      >
         Loading your prediction history...
       </div>
     );
@@ -34,7 +45,7 @@ const History = () => {
 
   if (isError) {
     return (
-      <div className="text-center text-red-500 mt-10">
+      <div className="text-center text-red-500 mt-10" data-aos="fade-down">
         Failed to load prediction history.
       </div>
     );
@@ -42,14 +53,14 @@ const History = () => {
 
   if (!predictions.length) {
     return (
-      <div className="text-center text-gray-500 mt-10">
+      <div className="text-center text-gray-500 mt-10" data-aos="zoom-in">
         You haven’t made any predictions yet.
       </div>
     );
   }
 
   return (
-    <div className="max-w-5xl mx-auto p-4 mt-10">
+    <div className="max-w-5xl mx-auto p-4 mt-10" data-aos="fade-up">
       <h2
         className="text-2xl font-bold text-center mb-8 text-blue-700"
         data-aos="fade-down"
@@ -73,6 +84,7 @@ const History = () => {
                 key={p._id}
                 className="border-b hover:bg-gray-50 transition"
                 data-aos="fade-up"
+                data-aos-delay={index * 100}
               >
                 <td className="py-3 px-4">{index + 1}</td>
                 <td className="py-3 px-4 text-sm text-gray-600">

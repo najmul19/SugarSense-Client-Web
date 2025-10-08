@@ -1,28 +1,46 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { FaBrain, FaChartLine, FaShieldAlt, FaHistory } from "react-icons/fa";
 import GradientButton from "../../../Shared/Buttons/GradientButton";
 
 const Home = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100,
+      easing: "ease-in-out",
+    });
+  }, []);
+
   return (
-    <div className="text-gray-800">
+    <div className="text-gray-800 overflow-hidden">
       {/* Hero Section */}
-      <section className="text-center py-20 card-bg-secondary">
-        <h1 className="text-4xl font-bold mb-4">
+      <section
+        className="text-center py-20 card-bg-secondary"
+        data-aos="fade-down"
+      >
+        <h1 className="text-4xl font-bold mb-4" data-aos="zoom-in">
           Predict Your Diabetes Risk in Seconds
         </h1>
-        <p className="text-lg mb-6">
+        <p className="text-lg mb-6" data-aos="fade-up">
           AI-powered health insights that help you take early action for a
           healthier future.
         </p>
-        <Link to="/predict">
-          <GradientButton text="Get Started"></GradientButton>
+        <Link to="/predict" data-aos="zoom-in" data-aos-delay="200">
+          <GradientButton text="Get Started" />
         </Link>
       </section>
 
       {/* About Section */}
-      <section className="py-16 px-6 max-w-4xl mx-auto text-center">
+      <section
+        className="py-16 px-6 max-w-4xl mx-auto text-center"
+        data-aos="fade-up"
+      >
         <h2 className="text-3xl font-semibold mb-4">About SugarSense</h2>
-        <p className="">
+        <p>
           SugarSense is a smart diabetes prediction system that uses machine
           learning to analyze your health indicators and assess your risk level.
           Our goal is to make early diagnosis easier, faster, and more accurate
@@ -31,7 +49,7 @@ const Home = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-16 ">
+      <section className="py-16" data-aos="fade-up">
         <h2 className="text-3xl font-semibold text-center mb-8">
           How It Works
         </h2>
@@ -53,16 +71,18 @@ const Home = () => {
             <div
               key={i}
               className="card-bg p-6 rounded-xl shadow hover:shadow-lg transition"
+              data-aos="flip-left"
+              data-aos-delay={i * 150}
             >
               <h3 className="font-bold text-lg mb-2">{item.title}</h3>
-              <p className="">{item.desc}</p>
+              <p>{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Features */}
-      <section className="py-16 px-6 ">
+      <section className="py-16 px-6" data-aos="fade-up">
         <h2 className="text-3xl font-semibold text-center mb-8">
           Key Features
         </h2>
@@ -92,24 +112,26 @@ const Home = () => {
             <div
               key={i}
               className="text-center card-bg p-6 rounded-xl shadow hover:shadow-lg transition"
+              data-aos="zoom-in"
+              data-aos-delay={i * 100}
             >
               <div className="text-blue-600 mb-3 flex justify-center">
                 {feature.icon}
               </div>
               <h3 className="font-bold text-lg mb-1">{feature.title}</h3>
-              <p className="  text-sm">{feature.desc}</p>
+              <p className="text-sm">{feature.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Educational Tips */}
-      <section className="py-16 px-6  text-center">
-        <div className="max-w-3xl mx-auto  space-y-3 text-gray-700 shadow rounded-2xl bg-amber-50 py-5">
-          <h2 className="text-3xl font-semibold mb-6">
+      <section className="py-16 px-6 text-center" data-aos="fade-up">
+        <div className="max-w-3xl mx-auto space-y-3 text-gray-700 shadow rounded-2xl bg-amber-50 py-5">
+          <h2 className="text-3xl font-semibold mb-6" data-aos="fade-down">
             Tips to Prevent Diabetes
           </h2>
-          <div className="">
+          <div className="space-y-1 pb-2" data-aos="fade-up" data-aos-delay="100">
             <p>
               • Maintain a balanced diet rich in vegetables and whole grains.
             </p>
@@ -117,19 +139,33 @@ const Home = () => {
             <p>• Avoid smoking and excessive alcohol consumption.</p>
             <p>• Schedule regular health checkups.</p>
           </div>
+          <Link to="diabetesEdu" >
+            <button
+              className="bg-gradient-to-b from-[#3b5998] via-[#3b5998] to-[#192f6a] 
+               hover:from-[#fafcfd] hover:via-[#eafaf7] hover:to-[#ffe9d6]
+               text-white hover:text-blue-600
+               py-2 px-4 rounded-md
+               transition duration-300 ease-in-out cursor-pointer"
+            >
+              Learn More
+            </button>
+          </Link>
         </div>
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 text-center card-bg-secondary text-white">
+      <section
+        className="py-20 text-center card-bg-secondary text-white"
+        data-aos="fade-up"
+      >
         <h2 className="text-3xl font-semibold mb-4">
           Ready to Check Your Diabetes Risk?
         </h2>
         <p className="mb-6">
           It only takes a minute to get your personalized prediction.
         </p>
-        <Link to="/predict">
-          <GradientButton text="Predict Now"></GradientButton>
+        <Link to="/predict" data-aos="zoom-in" data-aos-delay="150">
+          <GradientButton text="Predict Now" />
         </Link>
       </section>
     </div>
