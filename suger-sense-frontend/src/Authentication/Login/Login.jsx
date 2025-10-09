@@ -6,6 +6,9 @@ import Swal from "sweetalert2";
 import useAuth from "../../api/Hooks/useAuth";
 import axiosInstance from "../../api/axiosInstance";
 import SocialLogin from "../SocialLogin/SocilaLogin";
+import { useState } from "react";
+import AlertBox from "../../components/AlertBox";
+import { MdError } from "react-icons/md";
 
 const Login = () => {
   const {
@@ -20,7 +23,13 @@ const Login = () => {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
-
+  const [alert, setAlert] = useState({
+    isOpen: false,
+    icon: FaGoogle,
+    title: "",
+    body: "",
+    color: "green",
+  });
   const onSubmit = (data) => {
     signIn(data.email, data.password)
       .then((result) => {
@@ -28,20 +37,32 @@ const Login = () => {
 
         axiosPublic.post("/jwt", { email: user.email }).then((res) => {
           localStorage.setItem("access-token", res.data.token);
-          Swal.fire({
+          // Swal.fire({
+          //   title: "Login Successful!",
+          //   icon: "success",
+          //   confirmButtonColor: "green",
+          // });
+          setAlert({
+            isOpen: true,
+            icon: FaGoogle,
             title: "Login Successful!",
-            icon: "success",
-            confirmButtonColor: "green",
+            body: `Welcome back ! Redirecting...`,
+            color: "green",
           });
-          navigate(from, { replace: true });
+
+          setTimeout(() => {
+            setAlert((prev) => ({ ...prev, isOpen: false }));
+            navigate(from, { replace: true });
+          }, 2000);
         });
       })
       .catch((error) => {
-        Swal.fire({
+        setAlert({
+          isOpen: true,
+          icon: MdError,
           title: "Login Failed",
-          text: error.message,
-          icon: "error",
-          confirmButtonColor: "red",
+          body: `Something went wrong. ${error.message} Please try again.`,
+          color: "red",
         });
       });
   };
@@ -95,6 +116,10 @@ const Login = () => {
       <div className="divider text-gray-400 text-sm text-center my-2">OR</div>
 
       <SocialLogin></SocialLogin>
+      <AlertBox
+        {...alert}
+        onClose={() => setAlert((prev) => ({ ...prev, isOpen: false }))}
+      />
     </div>
   );
 };

@@ -1,11 +1,14 @@
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import SugerSenseLogoIcon from "../../Shared/SugerSenseLogoIcon/SugerSenseLogoIcon";
 import axiosInstance from "../../api/axiosInstance";
 import useAuth from "../../api/Hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocilaLogin";
+import { useState } from "react";
+import { MdError } from "react-icons/md";
+import AlertBox from "../../components/AlertBox";
 
 const Register = () => {
   const {
@@ -15,6 +18,16 @@ const Register = () => {
     reset,
     formState: { errors },
   } = useForm();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+  const [alert, setAlert] = useState({
+    isOpen: false,
+    icon: FaGoogle,
+    title: "",
+    body: "",
+    color: "green",
+  });
   const password = watch("password");
   const axiosPublic = axiosInstance;
   const navigate = useNavigate();
@@ -33,44 +46,46 @@ const Register = () => {
               // photoURL: data.photoURL,
             };
             axiosPublic.post("/users", userInfo).then((res) => {
-                if (res.data.insertedId) {
+              if (res.data.insertedId) {
                 axiosPublic.post("/jwt", { email: data.email }).then((res) => {
                   localStorage.setItem("access-token", res.data.token);
                 });
                 reset();
 
-                Swal.fire({
-                  title: "Welcome to KhabarKuri!",
-                  text: "Account created successfully",
-                  icon: "success",
-                  background: "white",
-                  color: "black",
-                  confirmButtonColor: "green",
+                setAlert({
+                  isOpen: true,
+                  icon: FaGoogle,
+                  title: "Register Successful!",
+                  body: `Welcome ${userInfo?.name} back!  Redirecting...`,
+                  color: "green",
                 });
-                navigate("/");
+
+                setTimeout(() => {
+                  setAlert((prev) => ({ ...prev, isOpen: false }));
+                  navigate(from, { replace: true });
+                }, 2000);
               }
             });
           })
           .catch((error) => {
             // console.log(error)
-            Swal.fire({
-              title: "Error",
-              text: error.message,
-              icon: "error",
-              background: "white",
-              color: "black",
-              confirmButtonColor: "red",
+            setAlert({
+              isOpen: true,
+              icon: MdError,
+              title: error.message,
+              body: "Something went wrong. Please try again.",
+              color: "red",
             });
+            
           });
       })
       .catch((error) => {
-        Swal.fire({
-          title: "Sign Up Failed",
-          text: error.message,
-          icon: "error",
-          background: "white",
-          color: "black",
-          confirmButtonColor: "red",
+        setAlert({
+          isOpen: true,
+          icon: MdError,
+          title: "Register Failed",
+          body: `Something went wrong. ${error.message} Please try again.`,
+          color: "red",
         });
       });
   };
@@ -151,6 +166,10 @@ const Register = () => {
         <FaGoogle className="text-red-500" /> Continue with Google
       </button> */}
       <SocialLogin></SocialLogin>
+       <AlertBox
+        {...alert}
+        onClose={() => setAlert((prev) => ({ ...prev, isOpen: false }))}
+      />
     </div>
   );
 };
