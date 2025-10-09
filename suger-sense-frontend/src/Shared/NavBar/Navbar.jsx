@@ -90,6 +90,13 @@ const Navbar = () => {
             DiabetesTips
           </Link>
           <Link
+            to="/chatbot"
+            className="hover:text-gray-200 "
+            onClick={() => setMenuOpen(false)}
+          >
+            AI Assistent
+          </Link>
+          <Link
             to="/features"
             className="hover:text-gray-200 "
             onClick={() => setMenuOpen(false)}
@@ -121,14 +128,14 @@ const Navbar = () => {
           ) : (
             <>
               <Link
-                to="/login"
+                to="/auth/login"
                 className="hover:text-gray-200 cursor-pointer"
                 onClick={() => setMenuOpen(false)}
               >
                 Login
               </Link>
               <Link
-                to="/register"
+                to="/auth/register"
                 className="hover:text-gray-200 cursor-pointer"
                 onClick={() => setMenuOpen(false)}
               >

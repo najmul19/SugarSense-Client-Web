@@ -15,6 +15,7 @@ import BMICalculator from "../Pages/BMICalculator/BMICalculator";
 import ManageUsers from "../Pages/ManageUsers/ManageUsers";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import AdminRoute from "./AdminRoute";
+import ChatBot from "../Pages/ChatBot/ChatBot";
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
         Component: DiabetesEducation,
       },
       {
+        path: "chatbot",
+        Component: ChatBot,
+      },
+      {
         path: "bmiCalculation",
         Component: BMICalculator,
       },
@@ -72,7 +77,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/",
+    path: "/auth",
     Component: AuthLayout,
     children: [
       { path: "login", Component: Login },
@@ -80,26 +85,25 @@ export const router = createBrowserRouter([
     ],
   },
   {
-  path: "/dashboard",
-  element: (
-    <AdminRoute>
-      <DashboardLayout />
-    </AdminRoute>
-  ),
-  children: [
-    {
-      index: true,
-      Component: Dashboard,
-    },
-    {
-      path: "manage-users",
-      Component: ManageUsers,
-    },
-    {
-      path: "api-docs",
-      Component: ApiDocs,
-    },
-  ],
-}
-
+    path: "/dashboard",
+    element: (
+      <AdminRoute>
+        <DashboardLayout />
+      </AdminRoute>
+    ),
+    children: [
+      {
+        index: true,
+        Component: Dashboard,
+      },
+      {
+        path: "manage-users",
+        Component: ManageUsers,
+      },
+      {
+        path: "api-docs",
+        Component: ApiDocs,
+      },
+    ],
+  },
 ]);

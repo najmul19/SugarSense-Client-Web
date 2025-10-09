@@ -41,7 +41,7 @@ const AuthLayout = () => {
             AI-powered diabetes prediction and prevention.
           </p>
         </div>
-        <h2 className="text-2xl font-bold mt-6 text-indigo-700">
+        <h2 className="text-2xl text-center font-bold mt-6 text-indigo-700">
           SugerSense - Your Diabetes Assistant
         </h2>
         <p className="text-gray-600 mt-3 text-center">
