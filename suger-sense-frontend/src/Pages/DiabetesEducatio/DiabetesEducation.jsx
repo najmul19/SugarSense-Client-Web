@@ -11,6 +11,7 @@ import {
   FaBed,
   FaUtensils,
   FaHeartbeat,
+  FaStethoscope,
 } from "react-icons/fa";
 import { GiMeditation, GiSodaCan } from "react-icons/gi";
 
@@ -104,22 +105,22 @@ const DiabetesEducation = () => {
   return (
     <div className="min-h-scree p-8 md:p-16">
       <h1
-        className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12"
+        className="text-3xl font-bold text-center mb-10 text-blue-700 flex justify-center items-center gap-2"
         data-aos="fade-down"
       >
-        Diabetes Prevention & Health Education
+       <FaStethoscope className="text-blue-600"></FaStethoscope> Diabetes Prevention & Health Education
       </h1>
 
       {sections.map((section, index) => (
         <div key={index} className="mb-16" data-aos="fade-up">
-          <h2 className="text-2xl font-semibold text-blue-700 mb-6 text-center">
+          <h2 className="text-2xl font-semibold text-blue-500 mb-6 text-center">
             {section.category}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {section.tips.map((tip, i) => (
               <div
                 key={i}
-                className="card-bg rounded-2xl shadow-lg p-6 hover:shadow-2xl transition"
+                className="card-bg rounded-2xl shadow p-6 hover:shadow-2xl transition"
                 data-aos="fade-up"
                 data-aos-delay={i * 100}
               >

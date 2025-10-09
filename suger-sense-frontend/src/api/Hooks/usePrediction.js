@@ -5,10 +5,20 @@ import useAuth from "./useAuth";
 export const usePrediction = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  // return useMutation({
+  //   mutationFn: async (data) => {
+  //     const res = await axiosSecure.post(`/predict?email=${user.email}`, data);
+  //     // return res.data;
+  //     return res;
+  //   },
+  // });
   return useMutation({
-    mutationFn: async (data) => {
-      const res = await axiosSecure.post(`/predict?email=${user.email}`, data);
-      return res.data;
+    mutationFn: async (payload) => {
+      const res = await axiosSecure.post(
+        `/predict?email=${user.email}`,
+        payload
+      );
+      return res;
     },
   });
 };

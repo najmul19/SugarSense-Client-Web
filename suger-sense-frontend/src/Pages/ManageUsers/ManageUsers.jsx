@@ -56,15 +56,15 @@ const ManageUsers = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <h2
-        className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-blue-700 mb-10"
+        className="text-3xl font-bold text-center mb-4 text-blue-700 flex justify-center items-center gap-2"
         data-aos="fade-down"
       >
-        <FaUserShield className="text-[#3b5998] text-3xl" />
+        <FaUserShield className="text-blue-600" />
         Manage Users
       </h2>
 
       <div
-        className="bg-white rounded-lg shadow-md border border-gray-200 overflow-x-auto"
+        className=" rounded-lg shadow border border-gray-200 overflow-x-auto"
         data-aos="fade-up"
       >
         {/* Table for medium+ screens */}

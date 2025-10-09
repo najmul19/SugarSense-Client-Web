@@ -43,7 +43,7 @@ const AlertBox = ({ isOpen, icon: Icon, title, body, onClose, color = "blue" }) 
 
             <button
               onClick={onClose}
-              className={`mt-4 w-full rounded-lg text-white font-medium ${
+              className={`mt-4 w-full rounded-lg cursor-pointer text-white font-medium ${
                 color === "red"
                   ? "bg-rose-600 hover:bg-rose-700"
                   : color === "green"

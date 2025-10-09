@@ -54,7 +54,7 @@ const BMICalculator = () => {
   return (
     <div className="min-h-screen  flex flex-col items-center justify-center p-6">
       <div
-        className="card-bg-n p-8 rounded-2xl shadow-xl max-w-md w-full"
+        className="card-bg-n p-8 rounded-2xl shadow max-w-md w-full"
         data-aos="fade-up"
       >
         <h1

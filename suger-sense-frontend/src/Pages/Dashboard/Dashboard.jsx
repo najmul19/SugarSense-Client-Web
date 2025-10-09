@@ -23,6 +23,7 @@ import useAxiosSecure from "../../api/Hooks/useAxiosSecure";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
+import { MdDashboard } from "react-icons/md";
 
 const COLORS = ["#EF4444", "#10B981"];
 
@@ -66,10 +67,10 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen  px-4 md:px-8 lg:px-16 py-10">
       <h1
+        className="text-3xl font-bold text-center mb-4 text-blue-700 flex justify-center items-center gap-2"
         data-aos="fade-down"
-        className="text-3xl font-bold text-center text-gray-800 mb-6"
       >
-        System Analytics Dashboard
+       <MdDashboard className="text-blue-600"></MdDashboard> System Analytics Dashboard
       </h1>
       <p
         data-aos="fade-up"
@@ -82,7 +83,7 @@ const Dashboard = () => {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3  gap-6 mb-12">
         <motion.div
           data-aos="fade-up"
-          className="card-bg-n shadow-md rounded-2xl p-6 text-center border-t-4 border-blue-500"
+          className="card-bg-n shadow rounded-2xl p-6 text-center border-t-4 border-blue-500"
         >
           <FaClipboardCheck className="text-blue-500 text-4xl mx-auto mb-3" />
           <h3 className="text-lg font-semibold">Total Predictions</h3>
@@ -91,7 +92,7 @@ const Dashboard = () => {
 
         <motion.div
           data-aos="fade-up"
-          className="card-bg-n shadow-md rounded-2xl p-6 text-center border-t-4 border-green-500"
+          className="card-bg-n shadow rounded-2xl p-6 text-center border-t-4 border-green-500"
         >
           <FaUsers className="text-green-500 text-4xl mx-auto mb-3" />
           <h3 className="text-lg font-semibold">Total Users</h3>
@@ -100,7 +101,7 @@ const Dashboard = () => {
 
         <motion.div
           data-aos="fade-up"
-          className="card-bg-n shadow-md rounded-2xl p-6 text-center border-t-4 border-red-500"
+          className="card-bg-n shadow rounded-2xl p-6 text-center border-t-4 border-red-500"
         >
           <FaHeartbeat className="text-red-500 text-4xl mx-auto mb-3" />
           <h3 className="text-lg font-semibold">Diabetic</h3>
@@ -109,7 +110,7 @@ const Dashboard = () => {
 
         <motion.div
           data-aos="fade-up"
-          className="card-bg-n shadow-md rounded-2xl p-6 text-center border-t-4 border-teal-500"
+          className="card-bg-n shadow rounded-2xl p-6 text-center border-t-4 border-teal-500"
         >
           <FaChartBar className="text-teal-500 text-4xl mx-auto mb-3" />
           <h3 className="text-lg font-semibold">Non-Diabetic</h3>
@@ -122,7 +123,7 @@ const Dashboard = () => {
         {/* Pie Chart */}
         <div
           data-aos="fade-right"
-          className="card-bg-n shadow-lg rounded-2xl p-6 flex flex-col items-center"
+          className="card-bg-n shadow rounded-2xl p-6 flex flex-col items-center"
         >
           <h3 className="text-lg font-semibold text-gray-700 mb-4">
             Prediction Distribution
@@ -156,7 +157,7 @@ const Dashboard = () => {
         {/* Bar Chart */}
         <div
           data-aos="fade-left"
-          className="card-bg-n shadow-lg rounded-2xl p-6 flex flex-col items-center"
+          className="card-bg-n shadow rounded-2xl p-6 flex flex-col items-center"
         >
           <h3 className="text-lg font-semibold text-gray-700 mb-4">
             System Overview

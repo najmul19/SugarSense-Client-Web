@@ -1,91 +1,12 @@
 import { useState } from "react";
 import { usePrediction } from "../api/Hooks/usePrediction";
 import ResultCard from "./ResultCard";
-import Swal from "sweetalert2";
-import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle } from "react-icons/fa";
+import { FaCheckCircle, FaExclamationTriangle, FaHeartbeat } from "react-icons/fa";
 import AlertBox from "./AlertBox";
+import LoadingSpinner from "../Shared/LoadingSpinner";
 
-const formSections = [
-  {
-    title: "Personal Information",
-    fields: ["Age", "Sex", "Income", "Education"],
-  },
-  {
-    title: "Health Metrics",
-    fields: ["BMI", "GenHlth", "HighBP", "HighChol", "CholCheck"],
-  },
-  {
-    title: "Lifestyle Factors",
-    fields: [
-      "PhysActivity",
-      "HvyAlcoholConsump",
-      "Smoker",
-      "Veggies",
-      "Fruits",
-    ],
-  },
-  {
-    title: "Medical History",
-    fields: ["HeartDiseaseorAttack", "Stroke", "DiffWalk", "AnyHealthcare"],
-  },
-];
-
-const fieldLabels = {
-  GenHlth: "General Health (1=Excellent, 5=Poor)",
-  HighBP: "High Blood Pressure (0=No, 1=Yes)",
-  BMI: "Body Mass Index",
-  Age: "Age Category",
-  HighChol: "High Cholesterol (0=No, 1=Yes)",
-  CholCheck: "Cholesterol Check in 5 Years (0=No, 1=Yes)",
-  Income: "Income Level",
-  Sex: "Biological Sex (0=Female, 1=Male)",
-  HeartDiseaseorAttack: "Heart Disease or Attack (0=No, 1=Yes)",
-  HvyAlcoholConsump: "Heavy Alcohol Consumption (0=No, 1=Yes)",
-  AnyHealthcare: "Any Healthcare Coverage (0=No, 1=Yes)",
-  DiffWalk: "Difficulty Walking (0=No, 1=Yes)",
-  PhysActivity: "Physical Activity (0=No, 1=Yes)",
-  Smoker: "Smoker (0=No, 1=Yes)",
-  Veggies: "Consume Vegetables Daily (0=No, 1=Yes)",
-  Fruits: "Consume Fruits Daily (0=No, 1=Yes)",
-  Education: "Education Level",
-  Stroke: "Ever Had Stroke (0=No, 1=Yes)",
-};
-
-const fieldOptions = {
-  Age: [
-    { label: "18-24", value: 1 },
-    { label: "25-29", value: 2 },
-    { label: "30-34", value: 3 },
-    { label: "35-39", value: 4 },
-    { label: "40-44", value: 5 },
-    { label: "45-49", value: 6 },
-    { label: "50-54", value: 7 },
-    { label: "55-59", value: 8 },
-    { label: "60-64", value: 9 },
-    { label: "65-69", value: 10 },
-    { label: "70-74", value: 11 },
-    { label: "75-79", value: 12 },
-    { label: "80+", value: 13 },
-  ],
-  Education: [
-    { label: "No School", value: 1 },
-    { label: "Elementary", value: 2 },
-    { label: "Some High School", value: 3 },
-    { label: "High School Graduate", value: 4 },
-    { label: "Some College", value: 5 },
-    { label: "College Graduate", value: 6 },
-  ],
-  Income: [
-    { label: "Less than $10,000", value: 1 },
-    { label: "$10,000 - $15,000", value: 2 },
-    { label: "$15,000 - $20,000", value: 3 },
-    { label: "$20,000 - $25,000", value: 4 },
-    { label: "$25,000 - $35,000", value: 5 },
-    { label: "$35,000 - $50,000", value: 6 },
-    { label: "$50,000 - $75,000", value: 7 },
-    { label: "$75,000 or more", value: 8 },
-  ],
-};
+import { formSections, fieldLabels, fieldOptions } from "./formConfig";
+import { MdWarning } from "react-icons/md";
 
 const PredictionForm = () => {
   const initialForm = Object.keys(fieldLabels).reduce(
@@ -95,7 +16,8 @@ const PredictionForm = () => {
   const [formData, setFormData] = useState(initialForm);
   const [currentSection, setCurrentSection] = useState(0);
   const [submitted, setSubmitted] = useState(false);
-  const { mutate, data, isLoading } = usePrediction();
+  // const { mutate, data, isLoading } = usePrediction();
+  const { mutate, data, isPending: isLoading } = usePrediction();
 
   const [alert, setAlert] = useState({
     isOpen: false,
@@ -105,14 +27,9 @@ const PredictionForm = () => {
     color: "blue",
   });
 
-  // const handleChange = (key, value) => {
-  //   setFormData({ ...formData, [key]: key === "BMI" ? value.toString().replace(/[^0-9.]/g, "") : Number(value) });
-  // };
   const handleChange = (key, value) => {
-    // for numeric inputs
-    if (!fieldOptions[key]) {
-      // allow only digits
-      if (/^[0-9]*$/.test(value)) {
+    if (key === "BMI") {
+      if (value === "" || /^[0-9]*\.?[0-9]*$/.test(value)) {
         setFormData({ ...formData, [key]: value });
       }
     } else {
@@ -120,32 +37,19 @@ const PredictionForm = () => {
     }
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setSubmitted(true);
-
-  //   // Validate all fields
-  //   for (const key in formData) {
-  //     if (formData[key] === "") {
-  //       alert(`Please fill in the ${key} field`);
-  //       return;
-  //     }
-  //   }
-
-  //   mutate(formData);
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
 
     for (const key in formData) {
       if (formData[key] === "") {
+        // console.log("formkey: ", formData[key], " key: ", key);
         setAlert({
           isOpen: true,
-          icon: FaExclamationTriangle, 
+          icon: FaExclamationTriangle,
           title: "Missing Field",
-          body: `Please fill in the ${key} field`,
+          // body: `Please fill in the ${key} field`,
+          body: `Please fill in the ${key || fieldLabels[key]} field`,
           color: "red",
         });
         return;
@@ -154,11 +58,11 @@ const PredictionForm = () => {
 
     mutate(formData, {
       onSuccess: (res) => {
-        const result = res.data.prediction;
-
+        const result = res.data.data.prediction;
+        // console.log(res.data.data.prediction);
         setAlert({
           isOpen: true,
-          icon: result === "Diabetic" ? FaTimesCircle : FaCheckCircle,
+          icon: result === "Diabetic" ? MdWarning : FaCheckCircle,
           title:
             result === "Diabetic"
               ? "Diabetes Detected"
@@ -174,10 +78,19 @@ const PredictionForm = () => {
   };
 
   const section = formSections[currentSection];
+  // to right,
+  //       #ffffff8f,
+  //       #eafaf7cc,
+  //       #ffe9d611
 
   return (
-    <div className="max-w-2xl mx-auto p-6  rounded-lg shadow ">
-      <h2 className="text-2xl font-bold mb-4 text-center">Predict Diabetes</h2>
+    <div className="max-w-2xl mt-15 mx-auto p-6 shadow bg-gradient-to-b from-[#ffffff8f] via-[#eafaf7cc] to-[#ffe9d611] rounded-lg ">
+      <h1
+        className="text-3xl font-bold text-center mb-4 text-blue-700 flex justify-center items-center gap-2"
+        data-aos="fade-down"
+      >
+        <FaHeartbeat className="text-blue-600" /> Predict Diabetes
+      </h1>
 
       <div className="mb-4">
         <h3 className="font-semibold mb-2">{section.title}</h3>
@@ -188,11 +101,15 @@ const PredictionForm = () => {
 
             {fieldOptions[key] ? (
               <select
-                value={formData[key]}
+                value={formData[key] !== undefined ? formData[key] : ""}
                 onChange={(e) => handleChange(key, e.target.value)}
                 className="w-full border p-2 rounded"
               >
-                <option value="">Select {key}</option>
+                {!formData[key] && (
+                  <option value="" disabled>
+                    Select {key}
+                  </option>
+                )}
                 {fieldOptions[key].map((opt) => (
                   <option key={opt.value} value={opt.value}>
                     {opt.label}
@@ -239,6 +156,11 @@ const PredictionForm = () => {
             {isLoading ? "Predicting..." : "Predict"}
           </button>
         )}
+        {isLoading && (
+          <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/40 backdrop-blur-sm">
+            <LoadingSpinner text="Prediction process is going on..." />
+          </div>
+        )}
       </div>
       {alert.isOpen && (
         <AlertBox
@@ -246,8 +168,7 @@ const PredictionForm = () => {
           onClose={() => setAlert((prev) => ({ ...prev, isOpen: false }))}
         />
       )}
-
-      {data && <ResultCard result={data.data.prediction} />}
+      {data && <ResultCard result={data.data.data.prediction} />}
     </div>
   );
 };

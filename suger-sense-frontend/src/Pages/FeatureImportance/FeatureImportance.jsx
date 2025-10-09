@@ -13,6 +13,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import useAxiosSecure from "../../api/Hooks/useAxiosSecure";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
+import { FaChartBar } from "react-icons/fa";
 
 const FeatureImportance = () => {
   const axiosSecure = useAxiosSecure();
@@ -59,14 +60,14 @@ const FeatureImportance = () => {
   return (
     <div className="min-h-screen p-6 md:p-10 lg:p-16">
       <h1
-        className="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-800"
+        className="text-3xl font-bold text-center mb-10 text-blue-700 flex justify-center items-center gap-2"
         data-aos="fade-down"
       >
-        Feature Importance Analysis
+       <FaChartBar className="text-blue-600"></FaChartBar> Feature Importance Analysis
       </h1>
 
       {/* Bar Chart Section */}
-      <div className="card-bg-n shadow-lg rounded-2xl p-4" data-aos="fade-up">
+      <div className="card-bg-n shadow rounded-2xl p-4" data-aos="fade-up">
         <ResponsiveContainer width="100%" height={isMobile ? 350 : 500}>
           <BarChart
             data={sortedData}
@@ -133,7 +134,7 @@ const FeatureImportance = () => {
       </p>
 
       <div
-        className="mt-10 bg-white shadow-md rounded-2xl p-6 max-w-4xl mx-auto"
+        className="mt-10 bg-white shadow rounded-2xl p-6 max-w-4xl mx-auto"
         data-aos="fade-up"
       >
         <h2 className="text-2xl font-semibold text-center mb-4 text-indigo-600">

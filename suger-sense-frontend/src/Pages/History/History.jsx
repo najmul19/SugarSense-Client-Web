@@ -72,15 +72,15 @@ const History = () => {
   return (
     <div className="max-w-5xl mx-auto p-4 mt-10" data-aos="fade-up">
       <h2
-        className="flex items-center justify-center gap-2 text-2xl font-bold text-center mb-8 text-blue-700"
+        className="text-3xl font-bold text-center mb-4 text-blue-700 flex justify-center items-center gap-2"
         data-aos="fade-down"
       >
-        <FaListAlt className="text-[#b0d4ff] text-2xl" />
+        <FaListAlt className=" text-2xl text-blue-600" />
         Your Prediction History
       </h2>
 
       <div
-        className="bg-white rounded-lg shadow-md border border-gray-200 overflow-x-auto"
+        className=" rounded-lg shadow border border-gray-200 overflow-x-auto"
         data-aos="fade-up"
       >
         {/* Desktop / Tablet Table */}
