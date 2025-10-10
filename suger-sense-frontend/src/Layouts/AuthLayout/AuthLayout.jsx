@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { FaHeartbeat } from "react-icons/fa";
-
+import img from "../../../public/sugerSenseLogoCircle.png"
 const AuthLayout = () => {
   const location = useLocation();
   const isLogin = location.pathname === "/login";
@@ -33,21 +33,22 @@ const AuthLayout = () => {
         /> */}
         
         <div className="flex flex-col items-center">
-          <FaHeartbeat className="text-6xl text-indigo-600" />
+          <img src={img} alt="SugarSense Logo" className="w-[100px] text-indigo-600" />
+          {/* <FaHeartbeat className="text-6xl text-indigo-600" /> */}
           <h2 className="text-2xl font-bold mt-4 text-indigo-700">
-            SugerSense
+            SugarSense
           </h2>
           <p className="text-gray-600 mt-2 text-center max-w-sm">
             AI-powered diabetes prediction and prevention.
           </p>
         </div>
         <h2 className="text-2xl text-center font-bold mt-6 text-indigo-700">
-          SugerSense - Your Diabetes Assistant
+          SugarSense - Your Diabetes Assistant
         </h2>
         <p className="text-gray-600 mt-3 text-center">
           {isLogin
             ? "Welcome back! Manage your health and track your predictions easily."
-            : "Join SugerSense today and take control of your health journey."}
+            : "Join SugarSense today and take control of your health journey."}
         </p>
       </div>
 

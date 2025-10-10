@@ -15,7 +15,7 @@ const SugerSenseLogoIcon = () => {
 
       {/* Text */}
       <h1 className="text-2xl font-extrabold bg-gradient-to-r from-[#3b5998] to-[#4c8bf5] text-transparent bg-clip-text tracking-wide">
-        SugerSense
+        SugarSense
       </h1>
     </Link>
   );
