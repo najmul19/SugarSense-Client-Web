@@ -15,7 +15,7 @@ const ChatBot = () => {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "Hello! I'm SugarSense AI 🩺, your health assistant. How can I help you today?",
+      content: "",
     },
   ]);
   const [input, setInput] = useState("");
@@ -60,7 +60,11 @@ const ChatBot = () => {
           ])
           .flat();
         setMessages([
-          { role: "assistant", content: "Welcome back! Let’s continue your health journey." },
+          {
+            role: "assistant",
+            content:
+              "Hello! I'm SugarSense AI 🩺, your health assistant. How can I help you today?",
+          },
           ...history,
         ]);
       } catch (err) {
@@ -77,13 +81,14 @@ const ChatBot = () => {
 
   return (
     <div className="flex flex-col h-[90vh] max-w-3xl sm:w-full mx-2 sm:mx-auto mt-6 bg-gradient-to-b from-blue-50 via-white to-blue-100 rounded-3xl shadow border border-blue-100 sm:h-[85vh] overflow-hidden">
-     
       <div className=" px-5 py-3 bg-[#2E4987] font-extrabold text-center mb-10  flex justify-center items-center gap-2">
         <FaRobot className="text-white text-2xl" />
-        <h2 
-        className=" bg-gradient-to-b from-[#fafcfd] text-2xl via-[#eafaf7] to-[#ffe9d6] text-transparent bg-clip-text tracking-wide"
-        // data-aos="fade-down"
-        >SugarSense AI</h2>
+        <h2
+          className=" bg-gradient-to-b from-[#fafcfd] text-2xl via-[#eafaf7] to-[#ffe9d6] text-transparent bg-clip-text tracking-wide"
+          // data-aos="fade-down"
+        >
+          SugarSense AI
+        </h2>
       </div>
 
       {/* Messages */}
@@ -161,7 +166,9 @@ const ChatBot = () => {
 
       {/* Footer */}
       <div className="text-center text-xs text-gray-500 bg-blue-50 py-2 border-t">
-        Powered by <span className="font-extrabold text-[#2E4987]">SugarSense AI</span> <FaSmile className="inline ml-1 text-[#2E4987] font-extrabold" />
+        Powered by{" "}
+        <span className="font-extrabold text-[#2E4987]">SugarSense AI</span>{" "}
+        <FaSmile className="inline ml-1 text-[#2E4987] font-extrabold" />
       </div>
     </div>
   );
