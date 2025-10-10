@@ -2,6 +2,14 @@ import React from "react";
 import { Droplet, Facebook, Linkedin, Youtube } from "lucide-react";
 import SugerSenseLogoIcon from "../SugerSenseLogoIcon/SugerSenseLogoIcon";
 import { Link } from "react-router-dom";
+import {
+  FaCode,
+  FaFacebook,
+  FaGit,
+  FaGithub,
+  FaLinkedinIn,
+  FaYoutube,
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -43,7 +51,8 @@ const Footer = () => {
           <Link to="/privacy" className="hover:text-white transition-colors">
             Privacy Policy
           </Link>
-          <Link to="/feedback"
+          <Link
+            to="/feedback"
             className="bg-gradient-to-b from-[#fafcfd] via-[#eafaf7] to-[#ffe9d6] hover:from-[#4c669f] hover:via-[#3b5998] hover:to-[#192f6a] text-blue-600 hover:text-white px-3 py-1 rounded-md transition-colors"
           >
             Feedback
@@ -53,28 +62,50 @@ const Footer = () => {
         {/* Social Media */}
         <div className="flex gap-4 mt-4 md:mt-0">
           <a
-            href="https://www.facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-500 transition-colors"
-          >
-            <Facebook size={20} />
-          </a>
-          <a
-            href="https://www.linkedin.com"
+            href="https://www.linkedin.com/in/najmul-islam80b158263/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-blue-400 transition-colors"
           >
-            <Linkedin size={20} />
+            <FaLinkedinIn size={20} />
+          </a>
+          {/* <FaLinkedinIn */}
+          {/* <FaGithub */}
+          <a
+            href="https://najmul19.github.io/md-najmul-islam-portfolio/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-400 transition-colors"
+          >
+            <FaCode size={20} />
+          </a>
+          {/* <FaGit></FaGit> */}
+
+          <a
+            href="https://github.com/najmul19"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-400 transition-colors"
+          >
+            <FaGithub size={20} />
           </a>
           <a
-            href="https://www.youtube.com"
+            href="https://www.facebook.com/md.najmul.islam.138619"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-500 transition-colors"
+          >
+            <FaFacebook size={20} />
+          </a>
+          {/* <FaFacebook */}
+
+          <a
+            href="https://www.youtube.com/@coddingplusplus"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-red-500 transition-colors"
           >
-            <Youtube size={20} />
+            <FaYoutube size={20} />
           </a>
         </div>
       </div>
