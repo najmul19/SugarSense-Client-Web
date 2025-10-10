@@ -43,7 +43,7 @@ const Navbar = () => {
             className="text-2xl font-extrabold bg-gradient-to-b from-[#fafcfd] via-[#eafaf7] to-[#ffe9d6]
                  hover:from-[#4c669f] hover:via-[#3b5998] hover:to-[#192f6a] text-transparent bg-clip-text tracking-wide"
           >
-            SugerSense
+            SugarSense
           </h1>
         </Link>
 
