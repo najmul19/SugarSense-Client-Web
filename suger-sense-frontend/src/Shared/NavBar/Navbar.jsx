@@ -49,7 +49,7 @@ const Navbar = () => {
 
         {/* Hamburger Icon (Mobile) */}
         <button
-          className="lg:hidden text-2xl focus:outline-none"
+          className="lg:hidden text-2xl hover:text-[#192f6a] focus:outline-none cursor-pointer"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <FaTimes /> : <FaBars />}
@@ -58,47 +58,47 @@ const Navbar = () => {
         {/* Navigation Links */}
         <nav
           className={`absolute lg:static top-full left-0 w-full lg:w-auto  lg:bg-transparent flex flex-col lg:flex-row items-center lg:space-x-6 space-y-4 lg:space-y-0 py-4 lg:py-0 transition-all duration-300 ease-in-out ${
-            menuOpen ? "block bg-[#192f6a]" : "hidden lg:flex"
+            menuOpen ? "block bg-gray-800" : "hidden lg:flex"
           }`}
         >
-          <Link to="/" className=" " onClick={() => setMenuOpen(false)}>
+          <Link to="/" className=" hover:text-gray-400 " onClick={() => setMenuOpen(false)}>
             Home
           </Link>
-          <Link to="/predict" className=" " onClick={() => setMenuOpen(false)}>
+          <Link to="/predict" className="  hover:text-gray-400 " onClick={() => setMenuOpen(false)}>
             Predict
           </Link>
 
           <Link
             to="/history"
-            className="hover:text-gray-200 "
+            className="hover:text-gray-400 "
             onClick={() => setMenuOpen(false)}
           >
             History
           </Link>
           <Link
             to="/bmiCalculation"
-            className="hover:text-gray-200"
+            className="hover:text-gray-400"
             onClick={() => setMenuOpen(false)}
           >
             BMI Calculator
           </Link>
           <Link
             to="/diabetesEdu"
-            className="hover:text-gray-200"
+            className="hover:text-gray-400"
             onClick={() => setMenuOpen(false)}
           >
             DiabetesTips
           </Link>
           <Link
             to="/chatbot"
-            className="hover:text-gray-200 "
+            className="hover:text-gray-400 "
             onClick={() => setMenuOpen(false)}
           >
             AI Assistent
           </Link>
           <Link
             to="/features"
-            className="hover:text-gray-200 "
+            className="hover:text-gray-400 "
             onClick={() => setMenuOpen(false)}
           >
             Feature Importance
@@ -106,7 +106,7 @@ const Navbar = () => {
           {isAdmin ? (
             <Link
               to="/dashboard"
-              className="hover:text-gray-200 "
+              className="hover:text-gray-400 "
               onClick={() => setMenuOpen(false)}
             >
               Dashboard
@@ -121,7 +121,7 @@ const Navbar = () => {
                 handleLogout();
                 setMenuOpen(false);
               }}
-              className="hover:text-gray-200 cursor-pointer "
+              className="hover:text-gray-400 cursor-pointer "
             >
               Logout
             </button>
@@ -129,14 +129,14 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="hover:text-gray-200 cursor-pointer"
+                className="hover:text-gray-400 cursor-pointer"
                 onClick={() => setMenuOpen(false)}
               >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="hover:text-gray-200 cursor-pointer"
+                className="hover:text-gray-400 cursor-pointer"
                 onClick={() => setMenuOpen(false)}
               >
                 Register

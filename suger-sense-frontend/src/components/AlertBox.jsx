@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const AlertBox = ({
@@ -8,6 +9,16 @@ const AlertBox = ({
   onClose,
   color = "blue",
 }) => {
+  // 🔹 Auto-close after 1 second when alert opens
+  useEffect(() => {
+    if (isOpen) {
+      const timer = setTimeout(() => {
+        onClose();
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, onClose]);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -27,7 +38,7 @@ const AlertBox = ({
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
-            className="bg-white rounded-2xl shadow p-5 sm:p-6 w-[85%] sm:w-[400px] text-center border border-gray-200"
+            className="bg-white rounded-2xl shadow p-5 sm:p-6 w-[70vw] sm:w-[400px] text-center border border-gray-200"
           >
             {Icon && (
               <Icon
@@ -58,19 +69,6 @@ const AlertBox = ({
                 {body}
               </p>
             )}
-
-            <button
-              onClick={onClose}
-              className={`mt-4 w-full rounded-lg cursor-pointer text-white font-medium ${
-                color === "red"
-                  ? "bg-rose-600 hover:bg-rose-700"
-                  : color === "green"
-                  ? "bg-green-600 hover:bg-green-700"
-                  : "bg-blue-600 hover:bg-blue-700"
-              } ${window.innerWidth < 640 ? "text-xs py-1.5" : "text-sm py-2"}`}
-            >
-              OK
-            </button>
           </motion.div>
         </div>
       )}

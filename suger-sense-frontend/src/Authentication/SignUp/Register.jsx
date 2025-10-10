@@ -76,7 +76,6 @@ const Register = () => {
               body: "Something went wrong. Please try again.",
               color: "red",
             });
-            
           });
       })
       .catch((error) => {
@@ -105,7 +104,7 @@ const Register = () => {
           className="w-full border rounded-md p-3 focus:ring-2 focus:ring-indigo-500"
         />
 
-        <input
+        {/* <input
           {...register("email", { required: true })}
           type="email"
           placeholder="Email"
@@ -113,9 +112,24 @@ const Register = () => {
         />
         {errors.email && (
           <p className="text-red-500 text-sm">Email is required</p>
+        )} */}
+        <input
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              message: "Enter a valid email like example@gmail.com",
+            },
+          })}
+          type="email"
+          placeholder="Email"
+          className="w-full border rounded-md p-3 focus:ring-2 focus:ring-indigo-500"
+        />
+        {errors.email && (
+          <p className="text-red-500 text-sm">{errors.email.message}</p>
         )}
 
-        <input
+        {/* <input
           {...register("password", { required: true, minLength: 6 })}
           type="password"
           placeholder="Password"
@@ -125,6 +139,25 @@ const Register = () => {
           <p className="text-red-500 text-sm">
             Password must be at least 6 characters
           </p>
+        )} */}
+
+        <input
+          {...register("password", {
+            required: "Password is required",
+            minLength: { value: 6, message: "Minimum 6 characters" },
+            maxLength: { value: 20, message: "Maximum 20 characters" },
+            pattern: {
+              value:
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/,
+              message: "Must include upper, lower, number & special character",
+            },
+          })}
+          type="password"
+          placeholder="Password"
+          className="w-full border rounded-md p-3 focus:ring-2 focus:ring-indigo-500"
+        />
+        {errors.password && (
+          <p className="text-red-500 text-sm">{errors.password.message}</p>
         )}
 
         <input
@@ -166,7 +199,7 @@ const Register = () => {
         <FaGoogle className="text-red-500" /> Continue with Google
       </button> */}
       <SocialLogin></SocialLogin>
-       <AlertBox
+      <AlertBox
         {...alert}
         onClose={() => setAlert((prev) => ({ ...prev, isOpen: false }))}
       />
