@@ -19,7 +19,7 @@ const Login = () => {
 
   const axiosPublic = axiosInstance;
   const navigate = useNavigate();
-  const { signIn } = useAuth();
+  const { signIn, logOut } = useAuth();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
@@ -35,13 +35,21 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
 
+        if (!user.emailVerified) {
+          setAlert({
+            isOpen: true,
+            icon: MdError,
+            title: "Email Not Verified",
+            body: "Please verify your email before logging in.",
+            color: "red",
+          });
+          logOut();
+          return; // stop login process
+        }
+
         axiosPublic.post("/jwt", { email: user.email }).then((res) => {
           localStorage.setItem("access-token", res.data.token);
-          // Swal.fire({
-          //   title: "Login Successful!",
-          //   icon: "success",
-          //   confirmButtonColor: "green",
-          // });
+         
           setAlert({
             isOpen: true,
             icon: FaGoogle,

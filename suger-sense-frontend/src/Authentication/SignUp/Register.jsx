@@ -31,13 +31,24 @@ const Register = () => {
   const password = watch("password");
   const axiosPublic = axiosInstance;
   const navigate = useNavigate();
-  const { createUser, updateUserProfile } = useAuth();
+  const { createUser, updateUserProfile, sendVerificationEmail } = useAuth();
   const onSubmit = (data) => {
     // console.log(data);
     // console.log(createUser);
     createUser(data.email, data.password)
-      .then(() => {
-        // const loggedUse = res.user;
+      .then((res) => {
+        const loggedUse = res.user;
+        // sendVerificationEmail();
+        sendVerificationEmail(loggedUse).then(() => {
+          setAlert({
+            isOpen: true,
+            icon: FaGoogle,
+            title: "Verify Your Email",
+            body: "Verification link sent to your email. Please verify before login.",
+            color: "orange",
+          });
+        });
+
         updateUserProfile(data.name)
           .then(() => {
             const userInfo = {
@@ -56,13 +67,13 @@ const Register = () => {
                   isOpen: true,
                   icon: FaGoogle,
                   title: "Register Successful!",
-                  body: `Welcome ${userInfo?.name} back!  Redirecting...`,
+                  body: `Welcome ${userInfo?.name}!  Please verified Your email First...`,
                   color: "green",
                 });
 
                 setTimeout(() => {
                   setAlert((prev) => ({ ...prev, isOpen: false }));
-                  navigate(from, { replace: true });
+                  navigate("/login");
                 }, 2000);
               }
             });
@@ -104,15 +115,6 @@ const Register = () => {
           className="w-full border rounded-md p-3 focus:ring-2 focus:ring-indigo-500"
         />
 
-        {/* <input
-          {...register("email", { required: true })}
-          type="email"
-          placeholder="Email"
-          className="w-full border rounded-md p-3 focus:ring-2 focus:ring-indigo-500"
-        />
-        {errors.email && (
-          <p className="text-red-500 text-sm">Email is required</p>
-        )} */}
         <input
           {...register("email", {
             required: "Email is required",
@@ -129,17 +131,7 @@ const Register = () => {
           <p className="text-red-500 text-sm">{errors.email.message}</p>
         )}
 
-        {/* <input
-          {...register("password", { required: true, minLength: 6 })}
-          type="password"
-          placeholder="Password"
-          className="w-full border rounded-md p-3 focus:ring-2 focus:ring-indigo-500"
-        />
-        {errors.password && (
-          <p className="text-red-500 text-sm">
-            Password must be at least 6 characters
-          </p>
-        )} */}
+        
 
         <input
           {...register("password", {
@@ -148,7 +140,7 @@ const Register = () => {
             maxLength: { value: 20, message: "Maximum 20 characters" },
             pattern: {
               value:
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/,
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#!%*?&])[A-Za-z\d@#$!%*?&]{6,20}$/,
               message: "Must include upper, lower, number & special character",
             },
           })}
