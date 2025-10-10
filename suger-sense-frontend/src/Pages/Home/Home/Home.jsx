@@ -35,8 +35,8 @@ const Home = () => {
     },
     enabled: !!user?.email,
   });
-  if(isLoading){
-    <LoadingSpinner text="Loading Home content"></LoadingSpinner>
+  if (isLoading) {
+    <LoadingSpinner text="Loading Home content"></LoadingSpinner>;
   }
 
   return (
@@ -46,19 +46,17 @@ const Home = () => {
         className="text-center py-10 card-bg-secondary"
         data-aos="fade-down"
       >
-        {
-  user ? (
-    <h1 className="flex items-center justify-center gap-2 text-xl font-semibold text-[#f1f5f9] px-4 pb-3 rounded-lg">
-      <FaUserCircle className="text-[#b0d4ff] text-2xl" />
-      Welcome, <span className="text-[#dbeafe]">{myData?.name}</span>
-    </h1>
-  ) : (
-    <h1 className="flex items-center justify-center gap-2 text-gray-300 italic px-4 py-2">
-      <FaUserCircle className="text-gray-400 text-xl" />
-      Welcome, Guest
-    </h1>
-  )
-}
+        {user ? (
+          <h1 className="flex items-center justify-center gap-2 text-xl font-semibold text-[#f1f5f9] px-4 pb-3 rounded-lg">
+            <FaUserCircle className="text-[#b0d4ff] text-2xl" />
+            Welcome, <span className="text-[#dbeafe]">{myData?.name}</span>
+          </h1>
+        ) : (
+          <h1 className="flex items-center justify-center gap-2 text-gray-300 italic px-4 py-2">
+            <FaUserCircle className="text-gray-400 text-xl" />
+            Welcome, Guest
+          </h1>
+        )}
 
         <h1 className="text-4xl font-bold mb-4" data-aos="zoom-in">
           Predict Your Diabetes Risk in Seconds
@@ -209,6 +207,36 @@ const Home = () => {
         <Link to="/predict" data-aos="zoom-in" data-aos-delay="150">
           <GradientButton text="Predict Now" />
         </Link>
+      </section>
+
+      {/* feeadback section */}
+
+      <section className="py-16 px-6  text-center" data-aos="fade-up">
+        <h2 className="text-3xl font-semibold text-blue-700 mb-6">Feedback</h2>
+
+        <div className="flex flex-col md:flex-row justify-center gap-6">
+          {/* All Feedback */}
+          <Link to="/allFeedback">
+            <button className="bg-gradient-to-b from-[#3b5998] via-[#3b5998] to-[#192f6a] 
+               hover:from-[#fafcfd] hover:via-[#eafaf7] hover:to-[#ffe9d6]
+               text-white hover:text-blue-600 px-6 py-3 rounded-md transition cursor-pointer">
+              View All Feedback
+            </button>
+          </Link>
+
+          {/* My Feedback */}
+          {myData?.role != "admin" ? (
+            <Link to="/myFeedback">
+              <button className=" bg-gradient-to-b from-[#3b9890] via-[#296574f1] to-[#196a69] 
+               hover:from-[#fafcfd] hover:via-[#eafaf7] hover:to-[#ffe9d6]
+                hover:text-blue-600 text-white px-6 py-3 rounded-md transition cursor-pointer">
+                My Feedback
+              </button>
+            </Link>
+          ) : (
+            ""
+          )}
+        </div>
       </section>
     </div>
   );

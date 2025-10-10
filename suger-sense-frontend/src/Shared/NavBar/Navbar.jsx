@@ -22,7 +22,7 @@ const Navbar = () => {
   // if (isAdminLoading) return <LoadingSpinner text="Checking admin access..." />;
 
   return (
-    <header className="sticky top-0 z-40 bg-gradient-to-r from-[#6377a3] via-[#3b5998] to-[#192f6a] text-white py-3 shadow-md">
+    <header className="sticky top-0 z-40 bg-gray-900 text-gray-100 py-3 shadow-md">
       <div className="container mx-auto flex justify-between items-center px-4">
         {/* Logo */}
 
@@ -32,7 +32,7 @@ const Navbar = () => {
         <Link
           to="/"
           className="flex items-center gap-2 group select-none"
-          data-aos="fade-left"
+          // data-aos="fade-left"
         >
           <div className="bg-gradient-to-b from-[#fafcfd] via-[#eafaf7] to-[#ffe9d6] hover:from-[#4c669f] hover:via-[#3b5998] hover:to-[#192f6a] p-2 rounded-lg shadow-md group-hover:scale-105 transition-transform duration-300">
             <Droplet className="text-blue-600 w-6 h-6 font-bold" />
@@ -128,14 +128,14 @@ const Navbar = () => {
           ) : (
             <>
               <Link
-                to="/auth/login"
+                to="/login"
                 className="hover:text-gray-200 cursor-pointer"
                 onClick={() => setMenuOpen(false)}
               >
                 Login
               </Link>
               <Link
-                to="/auth/register"
+                to="/register"
                 className="hover:text-gray-200 cursor-pointer"
                 onClick={() => setMenuOpen(false)}
               >

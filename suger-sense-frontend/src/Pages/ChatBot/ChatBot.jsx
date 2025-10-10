@@ -70,14 +70,14 @@ const ChatBot = () => {
     fetchHistory();
   }, []);
 
-  // Auto-scroll to bottom
+  // scroll btn
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   return (
     <div className="flex flex-col h-[90vh] max-w-3xl sm:w-full mx-2 sm:mx-auto mt-6 bg-gradient-to-b from-blue-50 via-white to-blue-100 rounded-3xl shadow border border-blue-100 sm:h-[85vh] overflow-hidden">
-      {/* Header */}
+     
       <div className=" px-5 py-3 bg-[#2E4987] font-extrabold text-center mb-10  flex justify-center items-center gap-2">
         <FaRobot className="text-white text-2xl" />
         <h2 

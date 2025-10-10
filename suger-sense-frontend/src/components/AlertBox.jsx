@@ -1,15 +1,33 @@
 import { motion, AnimatePresence } from "framer-motion";
 
-const AlertBox = ({ isOpen, icon: Icon, title, body, onClose, color = "blue" }) => {
+const AlertBox = ({
+  isOpen,
+  icon: Icon,
+  title,
+  body,
+  onClose,
+  color = "blue",
+}) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/40 backdrop-blur-sm">
+        <div
+          className="
+            fixed 
+            top-10 
+            left-1/2 
+            -translate-x-1/2 
+            z-50 
+            flex 
+            items-center 
+            justify-center
+          "
+        >
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
-            className="bg-white rounded-2xl shadow-xl p-5 sm:p-6 w-[85%] sm:w-[400px] text-center"
+            className="bg-white rounded-2xl shadow p-5 sm:p-6 w-[85%] sm:w-[400px] text-center border border-gray-200"
           >
             {Icon && (
               <Icon

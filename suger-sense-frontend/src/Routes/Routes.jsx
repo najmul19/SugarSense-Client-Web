@@ -16,6 +16,12 @@ import ManageUsers from "../Pages/ManageUsers/ManageUsers";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import AdminRoute from "./AdminRoute";
 import ChatBot from "../Pages/ChatBot/ChatBot";
+import About from "../Shared/Footer/About/About";
+import Contact from "../Shared/Footer/Contact/Contact";
+import PrivacyPolicy from "../Shared/Footer/PrivacyPolicy/PrivacyPolicy";
+import AllFeedback from "../Pages/Feedback/AllFeedback/AllFeedback";
+import MyFeedback from "../Pages/Feedback/MyFeedback/MyFeedBack";
+import FeedbackForm from "../Pages/Feedback/FeedbackForm/FeedbackForm";
 
 export const router = createBrowserRouter([
   {
@@ -64,7 +70,34 @@ export const router = createBrowserRouter([
       },
       {
         path: "chatbot",
-        Component: ChatBot,
+        // Component: ChatBot,
+        element: <PrivateRout><ChatBot></ChatBot></PrivateRout>
+      },
+      {
+        path: "about",
+        Component: About,
+      },
+      {
+        path: "contact",
+        Component: Contact,
+      },
+      {
+        path: "privacy",
+        Component: PrivacyPolicy,
+      },
+      {
+        path: "feedback",
+        // Component: FeedbackForm,
+        element: <PrivateRout><FeedbackForm></FeedbackForm></PrivateRout>
+      },
+      {
+        path: "allFeedback",
+        Component: AllFeedback,
+      },
+      {
+        path: "myFeedback",
+        // Component: MyFeedback,
+        element: <PrivateRout><MyFeedback></MyFeedback></PrivateRout>
       },
       {
         path: "bmiCalculation",
@@ -77,7 +110,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/auth",
+    path: "/",
     Component: AuthLayout,
     children: [
       { path: "login", Component: Login },
